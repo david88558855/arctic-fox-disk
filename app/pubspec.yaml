@@ -105,10 +105,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/icon/icon.png
-    - assets/icon/icon-macos.png
-    - assets/icon/icon-windows.png
+  # 应用内品牌标识走 lib/common/widgets/brand_mark.dart 的矢量绘制，
+  # assets/icon/*.png 仅供 flutter_launcher_icons / flutter_native_splash
+  # 在构建期生成各平台图标，不参与 APK 打包。
+  assets: []
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
