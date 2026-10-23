@@ -398,7 +398,7 @@ const file_api_base_setting_proto_rawDesc = "" +
 	"\rUpdateSetting\x12\x1f.api.base.Setting.UpdateRequest\x1a .api.base.Setting.UpdateResponse\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/api/settings\x12e\n" +
 	"\n" +
 	"GetSetting\x12\x1c.api.base.Setting.GetRequest\x1a\x1d.api.base.Setting.GetResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/setting/{key}B\x9c\x01\n" +
-	"\fcom.api.baseB\fSettingProtoP\x01Z=github.com/honmaple/maple-file/server/internal/proto/api/base\xa2\x02\x03ABX\xaa\x02\bApi.Base\xca\x02\bApi\\Base\xe2\x02\x14Api\\Base\\GPBMetadata\xea\x02\tApi::Baseb\x06proto3"
+	"\fcom.api.baseB\fSettingProtoP\x01Z=github.com/david88558855/arctic-fox-disk/server/internal/proto/api/base\xa2\x02\x03ABX\xaa\x02\bApi.Base\xca\x02\bApi\\Base\xe2\x02\x14Api\\Base\\GPBMetadata\xea\x02\tApi::Baseb\x06proto3"
 
 var (
 	file_api_base_setting_proto_rawDescOnce sync.Once

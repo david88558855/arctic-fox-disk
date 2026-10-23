@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.honmaple" "\0"
-            VALUE "FileDescription", "maple_file" "\0"
+            VALUE "CompanyName", "arcticfox.disk" "\0"
+            VALUE "FileDescription", "Arctic Fox Disk" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "maple_file" "\0"
+            VALUE "InternalName", "arctic_fox_disk" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.honmaple. All rights reserved." "\0"
-            VALUE "OriginalFilename", "maple_file.exe" "\0"
-            VALUE "ProductName", "maple_file" "\0"
+            VALUE "OriginalFilename", "arctic_fox_disk.exe" "\0"
+            VALUE "ProductName", "Arctic Fox Disk" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

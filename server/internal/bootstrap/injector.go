@@ -6,11 +6,11 @@ import (
 
 	"github.com/samber/do/v2"
 
-	"github.com/honmaple/maple-file/server/internal/api"
-	"github.com/honmaple/maple-file/server/internal/app"
-	"github.com/honmaple/maple-file/server/internal/platform/config"
-	"github.com/honmaple/maple-file/server/internal/platform/database"
-	"github.com/honmaple/maple-file/server/internal/platform/logger"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api"
+	"github.com/david88558855/arctic-fox-disk/server/internal/app"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/config"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/database"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/logger"
 )
 
 func NewInjector(cfg *config.Config) do.Injector {

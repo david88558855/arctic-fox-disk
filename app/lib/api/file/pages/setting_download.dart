@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'package:file_picker/file_picker.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/path.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/custom.dart';
-import 'package:maple_file/common/widgets/form.dart';
-import 'package:maple_file/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/path.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/custom.dart';
+import 'package:arctic_fox_disk/common/widgets/form.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
 
 import '../providers/file_setting.dart';
 

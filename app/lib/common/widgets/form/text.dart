@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:maple_file/app/i18n.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
 
 enum CustomListTileTextFieldType { number, string, password }
 

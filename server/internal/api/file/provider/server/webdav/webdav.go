@@ -16,8 +16,8 @@ import (
 	"golang.org/x/net/http2/h2c"
 	"golang.org/x/net/webdav"
 
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/server"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/structutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/server"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/structutil"
 )
 
 type Option struct {

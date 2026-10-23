@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:grpc/grpc.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:maple_file/app/grpc.dart';
-import 'package:maple_file/generated/proto/api/file/server.pbgrpc.dart'
+import 'package:arctic_fox_disk/app/grpc.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/server.pbgrpc.dart'
     as serverpb;
 
 part 'server.g.dart';

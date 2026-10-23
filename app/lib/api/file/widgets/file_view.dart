@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/app/grpc.dart';
-import 'package:maple_file/common/theme/design_tokens.dart';
-import 'package:maple_file/common/utils/path.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/utils/time.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/brand_mark.dart';
-import 'package:maple_file/common/widgets/custom.dart';
-import 'package:maple_file/common/widgets/surface_card.dart';
-import 'package:maple_file/common/providers/selection.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/app/grpc.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/utils/path.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/utils/time.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/brand_mark.dart';
+import 'package:arctic_fox_disk/common/widgets/custom.dart';
+import 'package:arctic_fox_disk/common/widgets/surface_card.dart';
+import 'package:arctic_fox_disk/common/providers/selection.dart';
 
-import 'package:maple_file/generated/proto/api/file/file.pb.dart';
-import 'package:maple_file/api/setting/providers/setting_appearance.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pb.dart';
+import 'package:arctic_fox_disk/api/setting/providers/setting_appearance.dart';
 
 import 'file_action.dart';
 import 'file_breadcrumb.dart';

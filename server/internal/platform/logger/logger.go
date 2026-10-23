@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"gopkg.in/natefinch/lumberjack.v2"
 
-	"github.com/honmaple/maple-file/server/internal/platform/config"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/config"
 )
 
 var levels = map[string]logrus.Level{

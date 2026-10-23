@@ -2,7 +2,7 @@ package main
 
 import "C"
 import (
-	"github.com/honmaple/maple-file/server/internal/bootstrap"
+	"github.com/david88558855/arctic-fox-disk/server/internal/bootstrap"
 )
 
 func main() {}

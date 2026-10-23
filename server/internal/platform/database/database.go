@@ -12,8 +12,8 @@ import (
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 
-	"github.com/honmaple/maple-file/server/internal/platform/config"
-	"github.com/honmaple/maple-file/server/internal/platform/database/serializer"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/config"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/database/serializer"
 )
 
 type (

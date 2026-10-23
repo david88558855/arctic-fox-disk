@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:grpc/grpc.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/app/grpc.dart';
-import 'package:maple_file/generated/proto/api/base/task.pbgrpc.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/app/grpc.dart';
+import 'package:arctic_fox_disk/generated/proto/api/base/task.pbgrpc.dart';
 
 class TaskService {
   static TaskService get instance => _instance;

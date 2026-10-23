@@ -7,8 +7,8 @@ import (
 
 	"github.com/honmaple/cloudfs"
 	"github.com/honmaple/cloudfs/middleware"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/pathutil"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/structutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/pathutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/structutil"
 )
 
 type Option struct {

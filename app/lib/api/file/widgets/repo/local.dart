@@ -6,12 +6,12 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:permission_handler/permission_handler.dart';
 import "package:macos_secure_bookmarks/macos_secure_bookmarks.dart";
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
-import 'package:maple_file/common/widgets/form.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/generated/proto/api/file/repo.pb.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/common/widgets/form.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/repo.pb.dart';
 
 class Local extends StatefulWidget {
   const Local({super.key, required this.form});

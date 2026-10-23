@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/honmaple/cloudfs"
-	"github.com/honmaple/maple-file/server/internal/api/file/types"
-	"github.com/honmaple/maple-file/server/internal/platform/runner"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/pathutil"
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/types"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/runner"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/pathutil"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file"
 )
 
 type (

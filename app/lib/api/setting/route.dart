@@ -1,4 +1,4 @@
-import 'package:maple_file/app/router.dart';
+import 'package:arctic_fox_disk/app/router.dart';
 
 import "pages/setting.dart";
 import "pages/setting_backup.dart";

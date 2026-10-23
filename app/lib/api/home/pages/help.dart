@@ -4,14 +4,14 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:maple_file/app/app.dart';
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/widgets/custom.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/common/widgets/responsive.dart';
-import 'package:maple_file/common/widgets/tree.dart';
+import 'package:arctic_fox_disk/app/app.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/widgets/custom.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/common/widgets/tree.dart';
 
 class HelpLink {
   final String name;

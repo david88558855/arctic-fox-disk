@@ -1,7 +1,7 @@
 import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
 
 class ColorUtil {
   static Color backgroundColorWithString(String value) {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"runtime"
 
-	"github.com/honmaple/maple-file/server/internal/app"
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/base"
+	"github.com/david88558855/arctic-fox-disk/server/internal/app"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/base"
 )
 
 func (srv *serviceImpl) Info(ctx context.Context, in *pb.Info_Request) (*pb.Info_Response, error) {

@@ -7,11 +7,11 @@ import 'package:path/path.dart' as filepath;
 import 'package:grpc/grpc.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/app/grpc.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/utils/isolate.dart';
-import 'package:maple_file/generated/proto/api/file/file.pbgrpc.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/app/grpc.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/utils/isolate.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pbgrpc.dart';
 
 class FileService {
   static FileService get instance => _instance;

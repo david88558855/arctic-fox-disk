@@ -12,13 +12,13 @@ import (
 	"github.com/labstack/echo/v4"
 	"google.golang.org/grpc"
 
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/fs"
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/server"
-	"github.com/honmaple/maple-file/server/internal/api/file/repository"
-	"github.com/honmaple/maple-file/server/internal/api/file/types"
-	"github.com/honmaple/maple-file/server/internal/api/shared"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/cacheutil"
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/fs"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/server"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/repository"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/types"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/shared"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/cacheutil"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file"
 )
 
 type (

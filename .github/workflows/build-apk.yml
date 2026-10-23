@@ -50,11 +50,11 @@ jobs:
           go get golang.org/x/mobile/bind
           gomobile init
           gomobile bind \
-            -ldflags="-w -s -X github.com/honmaple/maple-file/server/internal/app.VERSION=dev" \
+            -ldflags="-w -s -X github.com/david88558855/arctic-fox-disk/server/internal/app.VERSION=dev" \
             -o ../app/android/app/libs/libserver.aar \
             -target=android -androidapi 21 \
-            -javapkg="com.honmaple.maple_file" \
-            github.com/honmaple/maple-file/server/cmd/mobile
+            -javapkg="com.arcticfox.disk" \
+            github.com/david88558855/arctic-fox-disk/server/cmd/mobile
 
       - name: Pub get
         run: flutter pub get

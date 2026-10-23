@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart' as intl;
 
-import 'package:maple_file/generated/proto/google/protobuf/timestamp.pb.dart'
+import 'package:arctic_fox_disk/generated/proto/google/protobuf/timestamp.pb.dart'
     as pb;
 
 class TimeUtil {

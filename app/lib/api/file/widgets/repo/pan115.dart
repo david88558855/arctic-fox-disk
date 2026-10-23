@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/common/widgets/form.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/generated/proto/api/file/repo.pb.dart';
+import 'package:arctic_fox_disk/common/widgets/form.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/repo.pb.dart';
 
 class Pan115 extends StatefulWidget {
   const Pan115({super.key, required this.form});

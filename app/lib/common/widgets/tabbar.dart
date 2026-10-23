@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
 
 /// 点击回调：与旧实现（ConvexAppBar 的 GestureTapIndexCallback）签名一致，
 /// 上层调用点无需改动。

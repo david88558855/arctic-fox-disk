@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:extended_image_library/extended_image_library.dart' show File;
 
-import 'package:maple_file/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
 
 import 'source.dart';
 

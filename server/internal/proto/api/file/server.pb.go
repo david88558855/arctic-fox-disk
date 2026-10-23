@@ -372,7 +372,7 @@ const file_api_file_server_proto_rawDesc = "" +
 	"\n" +
 	"StopServer\x12$.api.file.ExternalServer.StopRequest\x1a%.api.file.ExternalServer.StopResponse\"\x00\x12[\n" +
 	"\fServerStatus\x12#.api.file.ExternalServer.GetRequest\x1a$.api.file.ExternalServer.GetResponse\"\x00B\x9b\x01\n" +
-	"\fcom.api.fileB\vServerProtoP\x01Z=github.com/honmaple/maple-file/server/internal/proto/api/file\xa2\x02\x03AFX\xaa\x02\bApi.File\xca\x02\bApi\\File\xe2\x02\x14Api\\File\\GPBMetadata\xea\x02\tApi::Fileb\x06proto3"
+	"\fcom.api.fileB\vServerProtoP\x01Z=github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file\xa2\x02\x03AFX\xaa\x02\bApi.File\xca\x02\bApi\\File\xe2\x02\x14Api\\File\\GPBMetadata\xea\x02\tApi::Fileb\x06proto3"
 
 var (
 	file_api_file_server_proto_rawDescOnce sync.Once

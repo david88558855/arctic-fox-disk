@@ -9,7 +9,7 @@ import (
 	"github.com/samber/do/v2"
 	"github.com/spf13/viper"
 
-	"github.com/honmaple/maple-file/server/internal/app"
+	"github.com/david88558855/arctic-fox-disk/server/internal/app"
 )
 
 var (

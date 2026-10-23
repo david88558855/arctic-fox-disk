@@ -194,7 +194,7 @@ const file_api_base_system_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\v2\x0e.api.base.InfoR\x06result2[\n" +
 	"\rSystemService\x12J\n" +
 	"\x04Info\x12\x16.api.base.Info.Request\x1a\x17.api.base.Info.Response\"\x11\x82\xd3\xe4\x93\x02\v\x12\t/api/infoB\x9b\x01\n" +
-	"\fcom.api.baseB\vSystemProtoP\x01Z=github.com/honmaple/maple-file/server/internal/proto/api/base\xa2\x02\x03ABX\xaa\x02\bApi.Base\xca\x02\bApi\\Base\xe2\x02\x14Api\\Base\\GPBMetadata\xea\x02\tApi::Baseb\x06proto3"
+	"\fcom.api.baseB\vSystemProtoP\x01Z=github.com/david88558855/arctic-fox-disk/server/internal/proto/api/base\xa2\x02\x03ABX\xaa\x02\bApi.Base\xca\x02\bApi\\Base\xe2\x02\x14Api\\Base\\GPBMetadata\xea\x02\tApi::Baseb\x06proto3"
 
 var (
 	file_api_base_system_proto_rawDescOnce sync.Once

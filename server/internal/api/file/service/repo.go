@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 	"errors"
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/fs"
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/fs"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file"
 )
 
 var (

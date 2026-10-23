@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/widgets/form.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
-import 'package:maple_file/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/widgets/form.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
 
 part 'encrypt.g.dart';
 part 'encrypt.freezed.dart';

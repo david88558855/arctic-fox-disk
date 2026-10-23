@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maple_file/app/router.dart';
-import 'package:maple_file/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/app/router.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
 
 import "pages/help.dart";
 import "pages/about.dart";

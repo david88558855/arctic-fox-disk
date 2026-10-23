@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/honmaple/maple-file/server/internal/api/file/types"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/types"
 )
 
 func (srv *serviceImpl) getFileSetting(ctx context.Context) *types.FileSetting {

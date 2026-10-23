@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:maple_file/common/utils/time.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/common/utils/time.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
 
 import 'common.dart';
 

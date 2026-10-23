@@ -8,7 +8,7 @@ import (
 
 	"gorm.io/gorm"
 
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/base"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/base"
 )
 
 type SettingRepository interface {

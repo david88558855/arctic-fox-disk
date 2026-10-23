@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/honmaple/maple-file/server/internal/proto
+    default: github.com/david88558855/arctic-fox-disk/server/internal/proto
     except:
       - buf.build/googleapis/googleapis
 

@@ -9,7 +9,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/honmaple/maple-file/server/internal/platform/utils/ioutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/ioutil"
 	"golang.org/x/image/draw"
 )
 

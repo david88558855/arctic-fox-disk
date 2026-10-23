@@ -3,10 +3,10 @@ package service
 import (
 	"context"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"github.com/honmaple/maple-file/server/internal/api/base/repository"
-	"github.com/honmaple/maple-file/server/internal/api/base/types"
-	"github.com/honmaple/maple-file/server/internal/api/shared"
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/base"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/base/repository"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/base/types"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/shared"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/base"
 	"google.golang.org/grpc"
 )
 

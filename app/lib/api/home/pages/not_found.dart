@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/app/i18n.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
 
 class NotFoundScreen extends StatelessWidget {
   const NotFoundScreen({super.key});

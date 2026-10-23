@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/honmaple/maple-file/server/internal/api/base"
-	"github.com/honmaple/maple-file/server/internal/api/file"
-	"github.com/honmaple/maple-file/server/internal/api/shared"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/base"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/shared"
 	"github.com/samber/do/v2"
 )
 

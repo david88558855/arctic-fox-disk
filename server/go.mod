@@ -1,4 +1,4 @@
-module github.com/honmaple/maple-file/server
+module github.com/david88558855/arctic-fox-disk/server
 
 go 1.26.0
 

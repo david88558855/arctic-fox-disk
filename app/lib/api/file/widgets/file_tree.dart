@@ -3,11 +3,11 @@ import 'package:path/path.dart' as filepath;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/path.dart';
-import 'package:maple_file/common/widgets/tree.dart';
-import 'package:maple_file/common/widgets/custom.dart';
-import 'package:maple_file/generated/proto/api/file/file.pb.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/path.dart';
+import 'package:arctic_fox_disk/common/widgets/tree.dart';
+import 'package:arctic_fox_disk/common/widgets/custom.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pb.dart';
 
 import '../providers/file.dart';
 

@@ -4,15 +4,15 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/theme/design_tokens.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/brand_mark.dart';
-import 'package:maple_file/common/widgets/custom.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/brand_mark.dart';
+import 'package:arctic_fox_disk/common/widgets/custom.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
 
-import 'package:maple_file/api/setting/providers/info.dart';
+import 'package:arctic_fox_disk/api/setting/providers/info.dart';
 
 class AboutScreen extends ConsumerWidget {
   const AboutScreen({super.key});
@@ -40,7 +40,7 @@ class AboutScreen extends ConsumerWidget {
                     child: Column(
                       children: [
                         const BrandMark(size: 64, color: MPColor.primary),
-                        Text("红枫云盘 {version}".tr(
+                        Text("白狐云盘 {version}".tr(
                           args: {"version": resp.version},
                         )),
                         const SizedBox(height: 8),
@@ -78,7 +78,7 @@ class AboutScreen extends ConsumerWidget {
                     trailing: PlatformListTileChevron(),
                     onTap: () async {
                       await launchUrl(Uri.parse(
-                        "https://github.com/honmaple/maple-file",
+                        "https://github.com/david88558855/arctic-fox-disk",
                       ));
                     },
                   ),
@@ -87,7 +87,7 @@ class AboutScreen extends ConsumerWidget {
                     trailing: PlatformListTileChevron(),
                     onTap: () async {
                       await launchUrl(Uri.parse(
-                        "https://github.com/honmaple/maple-file/blob/master/LICENSE",
+                        "https://github.com/david88558855/arctic-fox-disk/blob/master/LICENSE",
                       ));
                     },
                   ),

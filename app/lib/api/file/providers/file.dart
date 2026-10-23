@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:maple_file/common/providers/selection.dart';
-import 'package:maple_file/common/providers/pagination.dart';
-import 'package:maple_file/generated/proto/api/file/file.pb.dart';
+import 'package:arctic_fox_disk/common/providers/selection.dart';
+import 'package:arctic_fox_disk/common/providers/pagination.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pb.dart';
 
 import 'service.dart';
 import 'file_setting.dart';

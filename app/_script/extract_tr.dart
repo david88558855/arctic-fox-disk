@@ -3,8 +3,8 @@ import 'package:args/args.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart' as filepath;
 
-import 'package:maple_file/app/i18n/en_us.dart';
-import 'package:maple_file/app/i18n/zh_cn.dart';
+import 'package:arctic_fox_disk/app/i18n/en_us.dart';
+import 'package:arctic_fox_disk/app/i18n/zh_cn.dart';
 
 const languages = {
   "zh_cn": zhCN,

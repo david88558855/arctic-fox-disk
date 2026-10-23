@@ -8,15 +8,15 @@ import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart' as image_picker;
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/time.dart';
-import 'package:maple_file/common/utils/path.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/generated/proto/api/file/file.pb.dart';
-import 'package:maple_file/api/task/providers/task.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/time.dart';
+import 'package:arctic_fox_disk/common/utils/path.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pb.dart';
+import 'package:arctic_fox_disk/api/task/providers/task.dart';
 
 import '../providers/file.dart';
 import '../providers/file_setting.dart';

@@ -5,15 +5,15 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/custom.dart';
-import 'package:maple_file/common/widgets/form.dart';
-import 'package:maple_file/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/custom.dart';
+import 'package:arctic_fox_disk/common/widgets/form.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
 
-import 'package:maple_file/api/setting/providers/setting.dart';
-import 'package:maple_file/api/file/providers/server.dart';
+import 'package:arctic_fox_disk/api/setting/providers/setting.dart';
+import 'package:arctic_fox_disk/api/file/providers/server.dart';
 
 part 'webdav.g.dart';
 part 'webdav.freezed.dart';

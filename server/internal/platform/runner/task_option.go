@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/honmaple/maple-file/server/internal/platform/utils/structutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/structutil"
 )
 
 type (

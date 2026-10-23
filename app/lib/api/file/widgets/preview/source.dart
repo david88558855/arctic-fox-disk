@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as filepath;
 
-import 'package:maple_file/app/grpc.dart';
+import 'package:arctic_fox_disk/app/grpc.dart';
 
 enum SourceType {
   file,

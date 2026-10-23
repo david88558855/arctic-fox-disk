@@ -4,13 +4,13 @@ import (
 	"context"
 	"errors"
 
-	"github.com/honmaple/maple-file/server/internal/platform/config"
-	"github.com/honmaple/maple-file/server/internal/platform/database"
-	"github.com/honmaple/maple-file/server/internal/platform/logger"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/config"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/database"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/logger"
 )
 
 var (
-	PROCESS     = "maple-file"
+	PROCESS     = "arctic-fox-disk"
 	VERSION     = "dev"
 	DESCRIPTION = "Multi-protocol cloud file upload and management with serverless."
 )

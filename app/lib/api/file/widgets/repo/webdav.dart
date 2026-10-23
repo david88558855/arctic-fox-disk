@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/widgets/form.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/generated/proto/api/file/repo.pb.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/widgets/form.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/repo.pb.dart';
 
 part 'webdav.g.dart';
 part 'webdav.freezed.dart';

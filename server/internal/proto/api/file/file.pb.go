@@ -1078,7 +1078,7 @@ const file_api_file_file_proto_rawDesc = "" +
 	"\x06Upload\x12\x1c.api.file.File.UploadRequest\x1a\x1d.api.file.File.UploadResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/file/upload(\x01\x12l\n" +
 	"\bDownload\x12\x1e.api.file.File.DownloadRequest\x1a\x1f.api.file.File.DownloadResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/file/download0\x01\x12h\n" +
 	"\aPreview\x12\x1d.api.file.File.PreviewRequest\x1a\x1e.api.file.File.PreviewResponse\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/api/file/preview0\x01B\x99\x01\n" +
-	"\fcom.api.fileB\tFileProtoP\x01Z=github.com/honmaple/maple-file/server/internal/proto/api/file\xa2\x02\x03AFX\xaa\x02\bApi.File\xca\x02\bApi\\File\xe2\x02\x14Api\\File\\GPBMetadata\xea\x02\tApi::Fileb\x06proto3"
+	"\fcom.api.fileB\tFileProtoP\x01Z=github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file\xa2\x02\x03AFX\xaa\x02\bApi.File\xca\x02\bApi\\File\xe2\x02\x14Api\\File\\GPBMetadata\xea\x02\tApi::Fileb\x06proto3"
 
 var (
 	file_api_file_file_proto_rawDescOnce sync.Once

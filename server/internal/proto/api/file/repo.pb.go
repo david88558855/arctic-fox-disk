@@ -606,7 +606,7 @@ const file_api_file_repo_proto_rawDesc = "" +
 	"\n" +
 	"DeleteRepo\x12\x1c.api.file.Repo.DeleteRequest\x1a\x1d.api.file.Repo.DeleteResponse\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/file/repos/{id}\x12E\n" +
 	"\bTestRepo\x12\x1a.api.file.Repo.TestRequest\x1a\x1b.api.file.Repo.TestResponse\"\x00B\x99\x01\n" +
-	"\fcom.api.fileB\tRepoProtoP\x01Z=github.com/honmaple/maple-file/server/internal/proto/api/file\xa2\x02\x03AFX\xaa\x02\bApi.File\xca\x02\bApi\\File\xe2\x02\x14Api\\File\\GPBMetadata\xea\x02\tApi::Fileb\x06proto3"
+	"\fcom.api.fileB\tRepoProtoP\x01Z=github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file\xa2\x02\x03AFX\xaa\x02\bApi.File\xca\x02\bApi\\File\xe2\x02\x14Api\\File\\GPBMetadata\xea\x02\tApi::Fileb\x06proto3"
 
 var (
 	file_api_file_repo_proto_rawDescOnce sync.Once

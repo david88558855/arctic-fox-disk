@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as filepath;
 import 'package:audioplayers/audioplayers.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
 
 import 'source.dart';
 

@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
 
 class CustomOption<T> {
   CustomOption({

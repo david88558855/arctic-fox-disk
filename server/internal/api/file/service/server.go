@@ -3,10 +3,10 @@ package service
 import (
 	"context"
 
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file"
 
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/server"
-	_ "github.com/honmaple/maple-file/server/internal/api/file/provider/server/webdav"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/server"
+	_ "github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/server/webdav"
 )
 
 func (srv *serviceImpl) ServerStatus(ctx context.Context, req *pb.ExternalServer_GetRequest) (*pb.ExternalServer_GetResponse, error) {

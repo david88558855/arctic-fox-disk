@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:grpc/grpc.dart';
 
-import 'package:maple_file/app/i18n.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
 
 import 'tree.dart';
 import 'dialog.dart';

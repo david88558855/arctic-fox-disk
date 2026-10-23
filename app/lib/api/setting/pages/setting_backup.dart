@@ -1,7 +1,7 @@
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -9,17 +9,17 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:path/path.dart' as filepath;
 import 'package:file_picker/file_picker.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/app/grpc.dart';
-import 'package:maple_file/common/utils/time.dart';
-import 'package:maple_file/common/utils/path.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/generated/proto/api/file/file.pb.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/app/grpc.dart';
+import 'package:arctic_fox_disk/common/utils/time.dart';
+import 'package:arctic_fox_disk/common/utils/path.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pb.dart';
 
-import 'package:maple_file/api/file/providers/file.dart';
-import 'package:maple_file/api/file/providers/service.dart';
+import 'package:arctic_fox_disk/api/file/providers/file.dart';
+import 'package:arctic_fox_disk/api/file/providers/service.dart';
 
 class SettingBackupScreen extends ConsumerStatefulWidget {
   const SettingBackupScreen({super.key});
@@ -175,7 +175,7 @@ class _SettingBackupState extends ConsumerState<SettingBackupScreen> {
                 ),
                 const TextSpan(text: " "),
                 TextSpan(
-                  text: "恢复备份将会覆盖红枫云盘的所有数据".tr(),
+                  text: "恢复备份将会覆盖白狐云盘的所有数据".tr(),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],

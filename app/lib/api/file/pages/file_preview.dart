@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:path/path.dart' as filepath;
 
-import 'package:maple_file/app/grpc.dart';
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/utils/path.dart';
-import 'package:maple_file/generated/proto/api/file/file.pb.dart';
+import 'package:arctic_fox_disk/app/grpc.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/utils/path.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pb.dart';
 
 import '../widgets/preview/text.dart';
 import '../widgets/preview/video.dart';

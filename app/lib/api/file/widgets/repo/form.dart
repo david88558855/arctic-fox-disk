@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/responsive.dart';
-import 'package:maple_file/generated/proto/api/file/repo.pb.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/repo.pb.dart';
 
 import "advance.dart";
 import "alist.dart";

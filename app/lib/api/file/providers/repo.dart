@@ -6,11 +6,11 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:grpc/grpc.dart';
 import "package:macos_secure_bookmarks/macos_secure_bookmarks.dart";
 
-import "package:maple_file/app/app.dart";
-import 'package:maple_file/app/grpc.dart';
-import 'package:maple_file/app/i18n.dart';
-import "package:maple_file/common/utils/util.dart";
-import 'package:maple_file/generated/proto/api/file/repo.pbgrpc.dart';
+import "package:arctic_fox_disk/app/app.dart";
+import 'package:arctic_fox_disk/app/grpc.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import "package:arctic_fox_disk/common/utils/util.dart";
+import 'package:arctic_fox_disk/generated/proto/api/file/repo.pbgrpc.dart';
 
 class RepoService {
   static RepoService get instance => _instance;

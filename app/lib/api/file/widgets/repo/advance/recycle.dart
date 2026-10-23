@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/widgets/form.dart';
-import 'package:maple_file/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/widgets/form.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
 
 part 'recycle.g.dart';
 part 'recycle.freezed.dart';
@@ -75,7 +75,7 @@ class _RecycleFormState extends State<RecycleForm> {
             label: "回收站路径".tr(),
             value: _option.path,
             subtitle: Text(
-              "未设置时将在根目录创建.maplerecycle".tr(),
+              "未设置时将在根目录创建.arcticfoxrecycle".tr(),
               style: themeData.textTheme.bodySmall,
             ),
             onChanged: (result) {

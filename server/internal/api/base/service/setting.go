@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/base"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/base"
 )
 
 func (srv *serviceImpl) GetSetting(ctx context.Context, req *pb.Setting_GetRequest) (*pb.Setting_GetResponse, error) {

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:grpc/grpc.dart';
-import 'package:maple_file/app/grpc.dart';
-import 'package:maple_file/generated/proto/api/base/system.pbgrpc.dart';
-import 'package:maple_file/generated/proto/api/base/setting.pbgrpc.dart';
+import 'package:arctic_fox_disk/app/grpc.dart';
+import 'package:arctic_fox_disk/generated/proto/api/base/system.pbgrpc.dart';
+import 'package:arctic_fox_disk/generated/proto/api/base/setting.pbgrpc.dart';
 
 class SystemService {
   static SystemService get instance => _instance;

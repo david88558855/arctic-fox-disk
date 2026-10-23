@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	"github.com/honmaple/cloudfs"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/cacheutil"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/pathutil"
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/cacheutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/pathutil"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file"
 )
 
 type (

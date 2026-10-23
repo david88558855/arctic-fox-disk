@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
-import 'package:maple_file/app/i18n.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
 
 import 'source.dart';
 

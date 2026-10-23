@@ -2,11 +2,11 @@ package base
 
 import (
 	"context"
-	"github.com/honmaple/maple-file/server/internal/api/base/repository"
-	"github.com/honmaple/maple-file/server/internal/api/base/service"
-	"github.com/honmaple/maple-file/server/internal/api/base/types"
-	"github.com/honmaple/maple-file/server/internal/app"
-	"github.com/honmaple/maple-file/server/internal/platform/runner"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/base/repository"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/base/service"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/base/types"
+	"github.com/david88558855/arctic-fox-disk/server/internal/app"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/runner"
 	"github.com/samber/do/v2"
 )
 

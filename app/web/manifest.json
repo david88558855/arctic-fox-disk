@@ -1,11 +1,11 @@
 {
-    "name": "maple_file",
-    "short_name": "maple_file",
+    "name": "Arctic Fox Disk",
+    "short_name": "Arctic Fox Disk",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Arctic Fox Disk - a serverless multi-protocol cloud drive manager.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -10,11 +10,11 @@ import (
 	"strings"
 
 	"github.com/honmaple/cloudfs"
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/fs"
-	"github.com/honmaple/maple-file/server/internal/api/shared"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/ioutil"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/pathutil"
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/fs"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/shared"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/ioutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/pathutil"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file"
 )
 
 func (srv *serviceImpl) List(ctx context.Context, req *pb.File_ListRequest) (*pb.File_ListResponse, error) {

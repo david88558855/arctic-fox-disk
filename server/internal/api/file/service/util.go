@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/honmaple/cloudfs"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/strutil"
-	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/strutil"
+	pb "github.com/david88558855/arctic-fox-disk/server/internal/proto/api/file"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

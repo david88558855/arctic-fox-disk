@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:maple_file/app/i18n.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
 
 abstract class CustomListTileBase<T> extends StatelessWidget {
   const CustomListTileBase({

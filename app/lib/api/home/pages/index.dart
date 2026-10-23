@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:maple_file/app/app.dart';
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/theme/design_tokens.dart';
-import 'package:maple_file/common/widgets/brand_mark.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
-import 'package:maple_file/common/widgets/tabbar.dart';
-import 'package:maple_file/api/file/pages/file_list.dart';
-import 'package:maple_file/api/file/widgets/file_tree.dart';
-import 'package:maple_file/api/file/providers/file.dart';
-import 'package:maple_file/api/setting/pages/setting.dart';
+import 'package:arctic_fox_disk/app/app.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/widgets/brand_mark.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/common/widgets/tabbar.dart';
+import 'package:arctic_fox_disk/api/file/pages/file_list.dart';
+import 'package:arctic_fox_disk/api/file/widgets/file_tree.dart';
+import 'package:arctic_fox_disk/api/file/providers/file.dart';
+import 'package:arctic_fox_disk/api/setting/pages/setting.dart';
 
 import 'help.dart';
 

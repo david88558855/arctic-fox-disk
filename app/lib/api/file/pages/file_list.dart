@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/api/task/providers/task.dart';
-import 'package:maple_file/common/theme/design_tokens.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/widgets/brand_mark.dart';
-import 'package:maple_file/common/widgets/surface_card.dart';
-import 'package:maple_file/common/widgets/responsive.dart';
-import 'package:maple_file/common/providers/selection.dart';
-import 'package:maple_file/generated/proto/api/file/file.pb.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/api/task/providers/task.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/widgets/brand_mark.dart';
+import 'package:arctic_fox_disk/common/widgets/surface_card.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/common/providers/selection.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pb.dart';
 
 import '../widgets/file_drag.dart';
 import '../widgets/file_view.dart';
@@ -117,7 +117,7 @@ class _FileListState extends ConsumerState<FileListScreen> {
               ),
             )
           : null,
-      title: Text(_isRoot ? '红枫云盘'.tr() : title),
+      title: Text(_isRoot ? '白狐云盘'.tr() : title),
       actions: [
         if (Breakpoint.isSmall(context))
           IconButton(

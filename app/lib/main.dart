@@ -137,7 +137,7 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
           ),
           builder: (context) => PlatformApp(
             navigatorKey: App.navigatorKey,
-            title: '红枫云盘'.tr(),
+            title: '白狐云盘'.tr(),
             locale: I18n.delegate.isSupported(locale) ? locale : null,
             localizationsDelegates: I18n.localizationsDelegates,
             supportedLocales: I18n.supportedLocales,

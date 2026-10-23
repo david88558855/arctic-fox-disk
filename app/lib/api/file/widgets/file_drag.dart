@@ -3,15 +3,15 @@ import 'package:desktop_drop/desktop_drop.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/util.dart';
-import 'package:maple_file/common/utils/time.dart';
-import 'package:maple_file/common/utils/path.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
-import 'package:maple_file/generated/proto/api/file/file.pb.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/util.dart';
+import 'package:arctic_fox_disk/common/utils/time.dart';
+import 'package:arctic_fox_disk/common/utils/path.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/generated/proto/api/file/file.pb.dart';
 
 import '../providers/file.dart';
 import '../providers/service.dart';

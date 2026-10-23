@@ -11,7 +11,7 @@ import Libserver
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-        let serverChannel = FlutterMethodChannel(name: "honmaple.com/maple_file",
+        let serverChannel = FlutterMethodChannel(name: "app.arcticfox.disk/server",
                                                   binaryMessenger: controller.binaryMessenger)
         serverChannel.setMethodCallHandler({
             (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in

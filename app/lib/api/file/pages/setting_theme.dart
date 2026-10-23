@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/theme/design_tokens.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/form.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/api/setting/providers/setting_appearance.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/form.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/api/setting/providers/setting_appearance.dart';
 
 import '../providers/file_setting.dart';
 

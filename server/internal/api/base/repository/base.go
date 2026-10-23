@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/honmaple/maple-file/server/internal/api/base/types"
+import "github.com/david88558855/arctic-fox-disk/server/internal/api/base/types"
 
 type (
 	Repository interface {

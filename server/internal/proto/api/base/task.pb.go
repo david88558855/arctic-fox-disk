@@ -1230,7 +1230,7 @@ const file_api_base_task_proto_rawDesc = "" +
 	"\x11DeletePersistTask\x12#.api.base.PersistTask.DeleteRequest\x1a$.api.base.PersistTask.DeleteResponse\"\x1e\x82\xd3\xe4\x93\x02\x18*\x16/api/task/persist/{id}\x12Z\n" +
 	"\x0fTestPersistTask\x12!.api.base.PersistTask.TestRequest\x1a\".api.base.PersistTask.TestResponse\"\x00\x12c\n" +
 	"\x12ExecutePersistTask\x12$.api.base.PersistTask.ExecuteRequest\x1a%.api.base.PersistTask.ExecuteResponse\"\x00B\x99\x01\n" +
-	"\fcom.api.baseB\tTaskProtoP\x01Z=github.com/honmaple/maple-file/server/internal/proto/api/base\xa2\x02\x03ABX\xaa\x02\bApi.Base\xca\x02\bApi\\Base\xe2\x02\x14Api\\Base\\GPBMetadata\xea\x02\tApi::Baseb\x06proto3"
+	"\fcom.api.baseB\tTaskProtoP\x01Z=github.com/david88558855/arctic-fox-disk/server/internal/proto/api/base\xa2\x02\x03ABX\xaa\x02\bApi.Base\xca\x02\bApi\\Base\xe2\x02\x14Api\\Base\\GPBMetadata\xea\x02\tApi::Baseb\x06proto3"
 
 var (
 	file_api_base_task_proto_rawDescOnce sync.Once

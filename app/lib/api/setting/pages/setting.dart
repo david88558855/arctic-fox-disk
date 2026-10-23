@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:maple_file/app/app.dart';
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/tree.dart';
-import 'package:maple_file/common/widgets/custom.dart';
-import 'package:maple_file/common/widgets/platform.dart';
-import 'package:maple_file/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/app/app.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/tree.dart';
+import 'package:arctic_fox_disk/common/widgets/custom.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key, this.navigatorKey});

@@ -53,7 +53,7 @@ class GrpcFFIService implements GrpcIOService {
 }
 
 class GrpcChannelService implements GrpcIOService {
-  static const platform = MethodChannel("honmaple.com/maple_file");
+  static const platform = MethodChannel("app.arcticfox.disk/server");
 
   @override
   Future<String> start(Map<String, dynamic> cfg) async {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/widgets/breadcrumb.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/widgets/breadcrumb.dart';
 
 class FileBreadcrumb extends StatelessWidget {
   final String path;

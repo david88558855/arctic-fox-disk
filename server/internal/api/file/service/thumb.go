@@ -11,8 +11,8 @@ import (
 	"strings"
 
 	"github.com/honmaple/cloudfs"
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/fs"
-	"github.com/honmaple/maple-file/server/internal/app"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/fs"
+	"github.com/david88558855/arctic-fox-disk/server/internal/app"
 )
 
 func (srv *serviceImpl) thumbHash(path string) string {

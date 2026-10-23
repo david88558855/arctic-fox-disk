@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/honmaple/cloudfs"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/pathutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/pathutil"
 )
 
-const recycleName = ".maplerecycle"
+const recycleName = ".arcticfoxrecycle"
 
 type RecycleOption struct {
 	Path string `json:"path" validate:"omitempty,startswith=/"`

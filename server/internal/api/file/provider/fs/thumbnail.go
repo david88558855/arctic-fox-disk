@@ -12,9 +12,9 @@ import (
 	"github.com/djherbis/times"
 
 	"github.com/honmaple/cloudfs"
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/thumbnail"
-	"github.com/honmaple/maple-file/server/internal/platform/runner"
-	"github.com/honmaple/maple-file/server/internal/platform/utils/ioutil"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/thumbnail"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/runner"
+	"github.com/david88558855/arctic-fox-disk/server/internal/platform/utils/ioutil"
 )
 
 type ThumbTask struct {

@@ -1,13 +1,13 @@
-package com.honmaple.maple_file
+package com.arcticfox.disk
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
-import com.honmaple.maple_file.server.Server
+import com.arcticfox.disk.server.Server
 
 class MainActivity: FlutterActivity() {
-    private val CHANNEL = "honmaple.com/maple_file"
+    private val CHANNEL = "app.arcticfox.disk/server"
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)

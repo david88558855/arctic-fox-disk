@@ -3,10 +3,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'package:file_picker/file_picker.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/path.dart';
-import 'package:maple_file/common/widgets/dialog.dart';
-import 'package:maple_file/common/widgets/responsive.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/path.dart';
+import 'package:arctic_fox_disk/common/widgets/dialog.dart';
+import 'package:arctic_fox_disk/common/widgets/responsive.dart';
 
 import 'common.dart';
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/honmaple/cloudfs"
 	"github.com/honmaple/cloudfs/driver"
-	"github.com/honmaple/maple-file/server/internal/api/file/provider/fs/middleware"
+	"github.com/david88558855/arctic-fox-disk/server/internal/api/file/provider/fs/middleware"
 )
 
 func normalizeDriverName(name string) string {

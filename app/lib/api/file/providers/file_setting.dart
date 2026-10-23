@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/api/setting/providers/setting.dart';
-import 'package:maple_file/api/setting/providers/setting_appearance.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/api/setting/providers/setting.dart';
+import 'package:arctic_fox_disk/api/setting/providers/setting_appearance.dart';
 
 part 'file_setting.g.dart';
 part 'file_setting.freezed.dart';

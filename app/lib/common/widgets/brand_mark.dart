@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:maple_file/common/theme/design_tokens.dart';
+import 'package:arctic_fox_disk/common/theme/design_tokens.dart';
 
 /// 品牌标识：狐狸剪影。
 ///
 /// 一条闭合路径、纯色填充、无描边、无第二种颜色、无眼睛。
 /// 96 段三次贝塞尔，坐标系 64x64（四周留白 2.8，即画布宽的 4.4%）。
-/// 数据由 maple-fox-mark.svg 生成，与定稿图轮廓 IoU 0.975。
+/// 数据由 arctic-fox-mark.svg 生成，与定稿图轮廓 IoU 0.975。
 /// 不要手工改单个控制点；要改就回到 SVG 重新导出。
 class BrandMark extends StatelessWidget {
   const BrandMark({
@@ -91,7 +91,7 @@ class BrandMarkPainter extends CustomPainter {
   bool shouldRepaint(BrandMarkPainter oldDelegate) => oldDelegate.color != color;
 }
 
-// ---- 以下为生成代码（maple-fox-mark.svg），96 段，勿手改 ----
+// ---- 以下为生成代码（arctic-fox-mark.svg），96 段，勿手改 ----
 
 Path _buildFoxPath() {
   return Path()

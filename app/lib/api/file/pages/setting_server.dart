@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import 'package:maple_file/app/i18n.dart';
-import 'package:maple_file/common/utils/color.dart';
-import 'package:maple_file/common/widgets/platform.dart';
+import 'package:arctic_fox_disk/app/i18n.dart';
+import 'package:arctic_fox_disk/common/utils/color.dart';
+import 'package:arctic_fox_disk/common/widgets/platform.dart';
 
-import 'package:maple_file/api/file/widgets/server/webdav.dart';
+import 'package:arctic_fox_disk/api/file/widgets/server/webdav.dart';
 
 class FileSettingServerScreen extends ConsumerStatefulWidget {
   const FileSettingServerScreen({super.key});
