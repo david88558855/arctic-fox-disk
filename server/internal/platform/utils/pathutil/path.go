@@ -1,0 +1,22 @@
+package pathutil
+
+import (
+	stdpath "path"
+	"strings"
+)
+
+func CleanPath(path string) string {
+	// path = stdpath.FromSlash(path)
+	if !strings.HasPrefix(path, "/") {
+		path = "/" + path
+	}
+	return stdpath.Clean(path)
+}
+
+func IsSubPath(path string, subPath string) bool {
+	path, subPath = CleanPath(path), CleanPath(subPath)
+	if path == "/" {
+		return true
+	}
+	return path == subPath || strings.HasPrefix(subPath, path+"/")
+}

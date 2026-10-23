@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package api.file;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "api/file";
+
+service RepoService {
+	rpc ListRepos (Repo.ListRequest) returns (Repo.ListResponse) {
+		option (google.api.http) = {
+			get: "/api/file/repos"
+		};
+	}
+	rpc CreateRepo (Repo.CreateRequest) returns (Repo.CreateResponse) {
+		option (google.api.http) = {
+			post: "/api/file/repos"
+			body: "*"
+		};
+	}
+	rpc UpdateRepo (Repo.UpdateRequest) returns (Repo.UpdateResponse) {
+		option (google.api.http) = {
+			put: "/api/file/repos/{payload.id}"
+			body: "payload"
+		};
+	}
+	rpc DeleteRepo (Repo.DeleteRequest) returns (Repo.DeleteResponse) {
+		option (google.api.http) = {
+			delete: "/api/file/repos/{id}"
+		};
+	}
+	rpc TestRepo (Repo.TestRequest) returns (Repo.TestResponse) {}
+}
+
+message Repo {
+	// @gotags: gorm:"primary_key;auto_increment"
+	int32 id = 1;
+	// @gotags: gorm:"serializer:protobuf_timestamp;type:datetime"
+	google.protobuf.Timestamp created_at = 2;
+	// @gotags: gorm:"serializer:protobuf_timestamp;type:datetime"
+	google.protobuf.Timestamp updated_at = 3;
+
+	// @gotags: gorm:"not null;unique"
+	string name = 4;
+	string path = 5;
+	bool   status = 6;
+	string driver = 7;
+	string option = 8;
+
+	message ListRequest {
+		map<string, string> filter = 1;
+	}
+
+	message ListResponse {
+		repeated Repo results = 1;
+	}
+
+	message CreateRequest {
+		Repo payload = 1;
+	}
+
+	message CreateResponse {
+		Repo result = 1;
+	}
+
+	message TestRequest {
+		Repo payload = 1;
+	}
+
+	message TestResponse {
+		bool success = 1;
+	}
+
+	message UpdateRequest {
+		Repo payload = 1;
+	}
+
+	message UpdateResponse {
+		Repo result = 1;
+	}
+
+	message DeleteRequest {
+		int32 id = 1;
+	}
+
+	message DeleteResponse {
+	}
+}

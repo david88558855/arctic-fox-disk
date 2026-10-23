@@ -1,0 +1,187 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:maple_file/app/app.dart';
+import 'package:maple_file/app/i18n.dart';
+import 'package:maple_file/common/utils/util.dart';
+import 'package:maple_file/common/widgets/dialog.dart';
+import 'package:maple_file/common/widgets/tabbar.dart';
+import 'package:maple_file/api/file/pages/file_list.dart';
+import 'package:maple_file/api/file/widgets/file_tree.dart';
+import 'package:maple_file/api/file/providers/file.dart';
+import 'package:maple_file/api/setting/pages/setting.dart';
+
+import 'help.dart';
+
+class IndexScreen extends ConsumerStatefulWidget {
+  const IndexScreen({super.key});
+
+  @override
+  ConsumerState<IndexScreen> createState() => _IndexState();
+}
+
+class _IndexState extends ConsumerState<IndexScreen> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _widgets = <Widget>[
+    const FileListScreen(),
+    const SettingScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final fileSelection = ref.watch(
+      fileSelectionProvider.select((state) => state.enabled),
+    );
+    return Scaffold(
+      body: _widgets.elementAt(_selectedIndex),
+      bottomNavigationBar: !fileSelection
+          ? Container(
+              padding: Util.isAndroid ? EdgeInsets.only(bottom: 12) : null,
+              child: CustomTabBar(
+                items: [
+                  CustomTab(icon: Icons.business, label: "文件".tr()),
+                  CustomTab(icon: Icons.settings, label: "设置".tr()),
+                ],
+                onItemChanged: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+              ),
+            )
+          : null,
+    );
+  }
+}
+
+class DesktopIndexScreen extends ConsumerStatefulWidget {
+  const DesktopIndexScreen({super.key});
+
+  @override
+  ConsumerState<DesktopIndexScreen> createState() => _DesktopIndexState();
+}
+
+class _DesktopIndexState extends ConsumerState<DesktopIndexScreen> {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  final _navigatorKey1 = GlobalKey<NavigatorState>();
+
+  int _selectedIndex = 0;
+  bool _showFileTree = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final onGenerateRoute = App.router.onGenerateRouteReplace(
+      context: context,
+      replace: {
+        "/": null,
+      },
+    );
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) return;
+      },
+      child: Scaffold(
+        body: Row(
+          children: <Widget>[
+            NavigationRail(
+              minExtendedWidth: 200,
+              extended: false,
+              labelType: NavigationRailLabelType.all,
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: _onDestinationSelected,
+              destinations: <NavigationRailDestination>[
+                NavigationRailDestination(
+                  icon: const Icon(Icons.school),
+                  label: Text('文件'.tr()),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.swap_vert_circle),
+                  label: Text('任务'.tr()),
+                ),
+              ],
+              leading: Util.isWindows || Util.isWeb
+                  ? null
+                  : const SizedBox(height: 16),
+              trailing: Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Spacer(),
+                    IconButton(
+                      icon: Icon(Icons.settings, color: colorScheme.onSurface),
+                      onPressed: () {
+                        showCustomDialog(
+                          context,
+                          child: const DesktopSettingScreen(),
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.help, color: colorScheme.onSurface),
+                      onPressed: () {
+                        showCustomDialog(
+                          context,
+                          child: const DesktopHelpScreen(),
+                        );
+                      },
+                    ),
+                    if (_selectedIndex == 0)
+                      IconButton(
+                        icon: Icon(
+                          _showFileTree ? Icons.menu_open : Icons.menu,
+                          color: colorScheme.onSurface,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _showFileTree = !_showFileTree;
+                          });
+                        },
+                      ),
+                    const SizedBox(height: 8)
+                  ],
+                ),
+              ),
+            ),
+            if (_selectedIndex == 0 && _showFileTree)
+              const VerticalDivider(thickness: 1, width: 0.5),
+            AnimatedSize(
+              duration: const Duration(milliseconds: 200),
+              child: SizedBox(
+                width: (_selectedIndex == 0 && _showFileTree) ? 200 : 0,
+                child: CustomScrollView(
+                  slivers: [
+                    FileTree(navigatorKey: _navigatorKey),
+                  ],
+                ),
+              ),
+            ),
+            const VerticalDivider(thickness: 1, width: 0.5),
+            Expanded(
+              child: [
+                Navigator(
+                  key: _navigatorKey,
+                  initialRoute: "/file/list",
+                  onGenerateRoute: onGenerateRoute,
+                ),
+                Navigator(
+                  key: _navigatorKey1,
+                  initialRoute: "/task/list",
+                  onGenerateRoute: onGenerateRoute,
+                ),
+              ].elementAt(_selectedIndex),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _onDestinationSelected(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+}

@@ -1,0 +1,62 @@
+package service
+
+import (
+	stdpath "path"
+	"time"
+
+	"github.com/honmaple/cloudfs"
+	"github.com/honmaple/maple-file/server/internal/platform/utils/strutil"
+	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+	"google.golang.org/protobuf/types/known/timestamppb"
+)
+
+type readFunc func() (*pb.File_UploadRequest, error)
+
+func (rf readFunc) Read(p []byte) (n int, err error) {
+	req, err := rf()
+	if err != nil {
+		return 0, err
+	}
+	n = copy(p, req.GetChunk())
+	return n, nil
+}
+
+type chunkFunc func([]byte) error
+
+func (cf chunkFunc) Write(p []byte) (n int, err error) {
+	if err := cf(p); err != nil {
+		return 0, err
+	}
+	return len(p), nil
+}
+
+func renameFile(format, filename string) string {
+	if format == "" {
+		return filename
+	}
+	ext := stdpath.Ext(filename)
+	name := filename[:len(filename)-len(ext)]
+
+	now := time.Now()
+	return strutil.Replace(format, map[string]string{
+		"{extension}":   ext,
+		"{filename}":    name,
+		"{time:year}":   now.Format("2006"),
+		"{time:month}":  now.Format("01"),
+		"{time:day}":    now.Format("02"),
+		"{time:hour}":   now.Format("15"),
+		"{time:minute}": now.Format("04"),
+	})
+}
+
+func infoToFile(m cloudfs.FileInfo) *pb.File {
+	file := &pb.File{
+		Path:      m.Path(),
+		Name:      m.Name(),
+		Size:      m.Size(),
+		Type:      m.Type(),
+		CreatedAt: timestamppb.New(m.ModTime()),
+		UpdatedAt: timestamppb.New(m.ModTime()),
+	}
+	return file
+}

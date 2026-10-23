@@ -1,0 +1,94 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:maple_file/app/i18n.dart';
+import 'package:maple_file/common/widgets/form.dart';
+import 'package:maple_file/common/widgets/platform.dart';
+import 'package:maple_file/generated/proto/api/file/repo.pb.dart';
+
+part 'upyun.g.dart';
+part 'upyun.freezed.dart';
+
+@unfreezed
+class UpyunOption with _$UpyunOption {
+  factory UpyunOption({
+    @Default("") String endpoint,
+    @Default("") String bucket,
+    @Default("") String operator,
+    @Default("") String password,
+  }) = _UpyunOption;
+
+  factory UpyunOption.fromJson(Map<String, Object?> json) =>
+      _$UpyunOptionFromJson(json);
+}
+
+class Upyun extends StatefulWidget {
+  const Upyun({super.key, required this.form});
+
+  final Repo form;
+
+  @override
+  State<Upyun> createState() => _UpyunState();
+}
+
+class _UpyunState extends State<Upyun> {
+  late UpyunOption _option;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _option = widget.form.option == ""
+        ? UpyunOption()
+        : UpyunOption.fromJson(jsonDecode(widget.form.option));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomListSection(
+      hasLeading: false,
+      dividerMargin: 20,
+      children: [
+        CustomListTileTextField(
+          label: "存储桶".tr(),
+          value: _option.bucket,
+          isRequired: true,
+          onChanged: (result) {
+            setState(() {
+              _option.bucket = result;
+            });
+
+            widget.form.option = jsonEncode(_option);
+          },
+        ),
+        CustomListTileTextField(
+          label: "操作员".tr(),
+          value: _option.operator,
+          isRequired: true,
+          onChanged: (result) {
+            setState(() {
+              _option.operator = result;
+            });
+
+            widget.form.option = jsonEncode(_option);
+          },
+        ),
+        CustomListTileTextField(
+          type: CustomListTileTextFieldType.password,
+          label: "操作密码".tr(),
+          value: _option.password,
+          isRequired: true,
+          onChanged: (result) {
+            setState(() {
+              _option.password = result;
+            });
+
+            widget.form.option = jsonEncode(_option);
+          },
+        ),
+      ],
+    );
+  }
+}

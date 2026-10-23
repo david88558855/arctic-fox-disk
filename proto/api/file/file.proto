@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package api.file;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "api/file/repo.proto";
+
+option go_package = "api/file";
+
+service FileService {
+	rpc List (File.ListRequest) returns (File.ListResponse) {
+		option (google.api.http) = {
+			post: "/api/file/list"
+			body: "*"
+		};
+	}
+	rpc Move (File.MoveRequest) returns (File.MoveResponse) {
+		option (google.api.http) = {
+			post: "/api/file/move"
+			body: "*"
+		};
+	}
+	rpc Copy (File.CopyRequest) returns (File.CopyResponse) {
+		option (google.api.http) = {
+			post: "/api/file/copy"
+			body: "*"
+		};
+	}
+	rpc Mkdir (File.MkdirRequest) returns (File.MkdirResponse) {
+		option (google.api.http) = {
+			post: "/api/file/mkdir"
+			body: "*"
+		};
+	}
+	rpc Rename (File.RenameRequest) returns (File.RenameResponse) {
+		option (google.api.http) = {
+			post: "/api/file/rename"
+			body: "*"
+		};
+	}
+	rpc Remove (File.RemoveRequest) returns (File.RemoveResponse) {
+		option (google.api.http) = {
+			post: "/api/file/remove"
+			body: "*"
+		};
+	}
+	rpc Upload(stream File.UploadRequest) returns (File.UploadResponse) {
+		option (google.api.http) = {
+			post: "/api/file/upload"
+			body: "*"
+		};
+	}
+	rpc Download(File.DownloadRequest) returns (stream File.DownloadResponse) {
+		option (google.api.http) = {
+			post: "/api/file/download"
+			body: "*"
+		};
+	}
+	rpc Preview(File.PreviewRequest) returns (stream File.PreviewResponse) {
+		option (google.api.http) = {
+			post: "/api/file/preview"
+			body: "*"
+		};
+	}
+}
+
+message File {
+	// @gotags: gorm:"primary_key;auto_increment"
+	int32 id = 1;
+	// @gotags: gorm:"serializer:protobuf_timestamp;type:datetime"
+	google.protobuf.Timestamp created_at = 2;
+	// @gotags: gorm:"serializer:protobuf_timestamp;type:datetime"
+	google.protobuf.Timestamp updated_at = 3;
+
+	// @gotags: gorm:"not null;"
+	string name = 4;
+	string type = 5;
+	int64  size = 6;
+	string hash = 7;
+	// @gotags: gorm:"not null;"
+	string path = 8;
+	Repo repo = 10;
+
+	// @gotags: gorm:"not null"
+	int32 repo_id = 11;
+
+	message UploadRequest {
+		int32  index = 1;
+		int64  size = 5;
+		string path = 3;
+		string filename = 4;
+		bytes  chunk = 2;
+	}
+
+	message UploadResponse {
+		File result = 1;
+		string message = 2;
+	}
+
+	message ListRequest {
+		map<string, string> filter = 1;
+	}
+
+	message ListResponse {
+		repeated File results = 1;
+	}
+
+	message MoveRequest {
+		string path = 1;
+		string new_path = 2;
+		repeated string names = 3;
+	}
+
+	message MoveResponse {
+	}
+
+	message CopyRequest {
+		string path = 1;
+		string new_path = 2;
+		repeated string names = 3;
+	}
+
+	message CopyResponse {
+	}
+
+	message MkdirRequest {
+		string path = 1;
+		string name = 2;
+	}
+
+	message MkdirResponse {
+	}
+
+	message RenameRequest {
+		string path = 1;
+		string name = 2;
+		string new_name = 3;
+	}
+
+	message RenameResponse {
+	}
+
+	message RemoveRequest {
+		string path = 1;
+		repeated string names = 3;
+	}
+
+	message RemoveResponse {
+	}
+
+	message PreviewRequest {
+		string path = 1;
+	}
+
+	message PreviewResponse {
+		bytes chunk = 1;
+	}
+
+	message DownloadRequest {
+		string path = 1;
+	}
+
+	message DownloadResponse {
+		bytes chunk = 1;
+	}
+}

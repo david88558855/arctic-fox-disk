@@ -1,0 +1,361 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: "Build platform"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - ios
+          - macos
+          - android
+          - windows
+  release:
+    types: [published]
+    paths:
+      - "app/**"
+      - "proto/**"
+      - "server/**"
+      - ".github/workflows/*.yml"
+
+env:
+  GO_VERSION: "1.23"
+  NODE_VERSION: "24"
+  FLUTTER_VERSION: "3.29.3"
+
+jobs:
+  get-version:
+    runs-on: ubuntu-22.04
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get version from pubspec.yaml
+        id: get-version
+        run: |
+          VERSION=$(sed -n 's/^version: \([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p' app/pubspec.yaml)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "current version is $VERSION"
+
+  build-macos-x64-lib:
+    if: ${{ github.event_name == 'release' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'macos' }}
+    needs:
+      - get-version
+    runs-on: macos-15-intel
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: "**/go.sum"
+
+      - name: Build dylib
+        run: |
+          cd server
+          go build -ldflags="-w -s -X github.com/honmaple/maple-file/server/internal/app.VERSION=${{ needs.get-version.outputs.version }}" -buildmode=c-shared -o libserver.dylib github.com/honmaple/maple-file/server/cmd/desktop
+
+      - name: Upload dylib
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-x64-lib
+          path: server/libserver.dylib
+
+  build-macos:
+    if: ${{ github.event_name == 'release' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'macos' }}
+    needs:
+      - get-version
+      - build-macos-x64-lib
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: "**/go.sum"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Setup NPM
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install appdmg
+        run: |
+          python3 -m pip install setuptools --break-system-packages
+          npm install -g appdmg
+
+      - name: Download x64 dylib
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-x64-lib
+          path: server/x64
+
+      - name: Build arm64 dylib
+        run: |
+          cd server
+          go build -ldflags="-w -s -X github.com/honmaple/maple-file/server/internal/app.VERSION=${{ needs.get-version.outputs.version }}" -buildmode=c-shared -o libserver.dylib github.com/honmaple/maple-file/server/cmd/desktop
+
+      - name: Create dylib
+        run: |
+          mkdir -p app/macos/Frameworks
+          cp server/libserver.dylib app/macos/Frameworks/arm64-lib
+          cp server/x64/libserver.dylib app/macos/Frameworks/x64-lib
+
+          cd app/macos/Frameworks
+          lipo -create -output libserver.dylib arm64-lib x64-lib
+
+      - name: Build dmg
+        run: |
+          cd app
+          flutter pub get
+          dart run build_runner build
+          flutter build macos
+
+          cd build/macos/Build/Products/Release
+          cat>appdmg.json<<EOF
+          {
+          "title": "红枫云盘",
+          "icon": "MapleFile.app/Contents/Resources/AppIcon.icns",
+          "background-color": "#ffffff",
+          "contents": [
+          { "x": 448, "y": 344, "type": "link", "path": "/Applications" },
+          { "x": 192, "y": 344, "type": "file", "path": "MapleFile.app" }
+          ]
+          }
+          EOF
+
+          mkdir dist
+          appdmg appdmg.json dist/maple-file-${{ needs.get-version.outputs.version }}-macos.dmg
+
+      - name: Upload dmg file
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-result
+          path: app/build/macos/Build/Products/Release/dist/*.dmg
+
+  build-windows:
+    if: ${{ github.event_name == 'release' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'windows' }}
+    needs:
+      - get-version
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: "**/go.sum"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Build dll
+        run: |
+          cd server
+          go build -ldflags="-w -s -X github.com/honmaple/maple-file/server/internal/app.VERSION=${{ needs.get-version.outputs.version }}" -buildmode=c-shared -o ../app/windows/libserver.dll github.com/honmaple/maple-file/server/cmd/desktop
+
+      - name: Build exe
+        run: |
+          cd app
+          flutter pub get
+          dart run build_runner build
+          flutter build windows
+
+          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath maple-file-${{ needs.get-version.outputs.version }}-windows-x86_64.zip
+
+      - name: Upload exe file
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-result
+          path: app/maple-file-*.zip
+
+  build-ios:
+    if: ${{ github.event_name == 'release' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios' }}
+    needs:
+      - get-version
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: "**/go.sum"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Build xcframework
+        run: |
+          mkdir app/ios/Frameworks
+
+          cd server
+          go install golang.org/x/mobile/cmd/gomobile@latest
+          go get golang.org/x/mobile/bind
+          gomobile init
+          gomobile bind -ldflags="-w -s -X github.com/honmaple/maple-file/server/internal/app.VERSION=${{ needs.get-version.outputs.version }}" -o ../app/ios/Frameworks/libserver.xcframework -target=ios github.com/honmaple/maple-file/server/cmd/mobile
+
+      - name: Build ipa
+        env:
+          VERSION: ${{ needs.get-release.outputs.version }}
+        run: |
+          cd app
+          flutter pub get
+          dart run build_runner build
+          flutter build ios --no-codesign
+
+          mkdir Payload
+          cp -r build/ios/iphoneos/Runner.app Payload
+          zip -r -y Payload.zip Payload/Runner.app
+          mv Payload.zip maple-file-${{ needs.get-version.outputs.version }}-ios.ipa
+
+      - name: Upload ipa
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-result
+          path: |
+            app/maple-file-*.ipa
+
+  build-android:
+    if: ${{ github.event_name == 'release' || github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android' }}
+    needs:
+      - get-version
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: "**/go.sum"
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Decode key.properties file
+        env:
+          ENCODED_STRING: ${{ secrets.ANDROID_KEY_PROPERTIES }}
+        run: echo $ENCODED_STRING | base64 -di > app/android/key.properties
+
+      - name: Decode keystore.jks file
+        env:
+          ENCODED_STRING: ${{ secrets.ANDROID_KEY_STORE }}
+        run: echo $ENCODED_STRING | base64 -di > app/android/keystore.jks
+
+      - name: Build Go aar
+        run: |
+          mkdir app/android/app/libs
+
+          cd server
+          go install golang.org/x/mobile/cmd/gomobile@latest
+          go get golang.org/x/mobile/bind
+          gomobile init
+          gomobile bind -ldflags="-w -s -X github.com/honmaple/maple-file/server/internal/app.VERSION=${{ needs.get-version.outputs.version }}" -o ../app/android/app/libs/libserver.aar -target=android -androidapi 21 -javapkg="com.honmaple.maple_file" github.com/honmaple/maple-file/server/cmd/mobile
+
+      - name: Build APK
+        run: |
+          cd app
+          flutter pub get
+          dart run build_runner build
+          flutter build apk --no-tree-shake-icons --split-per-abi
+
+          cd build/app/outputs/flutter-apk
+          mv app-x86_64-release.apk maple-file-${{ needs.get-version.outputs.version }}-android-x86_64.apk
+          mv app-arm64-v8a-release.apk maple-file-${{ needs.get-version.outputs.version }}-android-arm64-v8a.apk
+          mv app-armeabi-v7a-release.apk maple-file-${{ needs.get-version.outputs.version }}-android-armeabi-v7a.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-result
+          path: |
+            app/build/app/outputs/flutter-apk/maple-file-*.apk
+
+  release:
+    if: ${{ github.event_name == 'release' }}
+    needs:
+      - build-macos
+      - build-windows
+      - build-ios
+      - build-android
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download dmg file
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-result
+          path: macos-result
+
+      - name: Download exe file
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-result
+          path: windows-result
+
+      - name: Download ipa file
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-result
+          path: ios-result
+
+      - name: Download apk file
+        uses: actions/download-artifact@v4
+        with:
+          name: android-result
+          path: android-result
+
+      - name: Release version
+        uses: softprops/action-gh-release@v2
+        if: github.event_name == 'release'
+        with:
+          files: |
+            macos-result/*.dmg
+            windows-result/*.zip
+            ios-result/*.ipa
+            android-result/*.apk
+          token: ${{ secrets.GITHUB_TOKEN }}

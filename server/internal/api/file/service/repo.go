@@ -1,0 +1,78 @@
+package service
+
+import (
+	"context"
+	"errors"
+	"github.com/honmaple/maple-file/server/internal/api/file/provider/fs"
+	pb "github.com/honmaple/maple-file/server/internal/proto/api/file"
+)
+
+var (
+	errBadRequest = errors.New("错误的参数")
+)
+
+func (srv *serviceImpl) ListRepos(ctx context.Context, req *pb.Repo_ListRequest) (*pb.Repo_ListResponse, error) {
+	results, err := srv.repo.ListRepos(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.Repo_ListResponse{Results: results}, nil
+}
+
+func (srv *serviceImpl) CreateRepo(ctx context.Context, req *pb.Repo_CreateRequest) (*pb.Repo_CreateResponse, error) {
+	opt := req.GetPayload()
+	if opt == nil {
+		return nil, errBadRequest
+	}
+	result, err := srv.repo.CreateRepo(ctx, opt)
+	if err != nil {
+		return nil, err
+	}
+	srv.resolver.Create(result)
+	return &pb.Repo_CreateResponse{Result: result}, nil
+}
+
+func (srv *serviceImpl) UpdateRepo(ctx context.Context, req *pb.Repo_UpdateRequest) (*pb.Repo_UpdateResponse, error) {
+	opt := req.GetPayload()
+	if opt == nil {
+		return nil, errBadRequest
+	}
+
+	old, result, err := srv.repo.UpdateRepo(ctx, opt)
+	if err != nil {
+		return nil, err
+	}
+	srv.resolver.Update(old, result)
+	return &pb.Repo_UpdateResponse{Result: old}, nil
+}
+
+func (srv *serviceImpl) DeleteRepo(ctx context.Context, req *pb.Repo_DeleteRequest) (*pb.Repo_DeleteResponse, error) {
+	ins, err := srv.repo.DeleteRepo(ctx, req.GetId())
+	if err != nil {
+		return nil, err
+	}
+	srv.resolver.Delete(ins)
+	return &pb.Repo_DeleteResponse{}, nil
+}
+
+func (srv *serviceImpl) TestRepo(ctx context.Context, req *pb.Repo_TestRequest) (*pb.Repo_TestResponse, error) {
+	opt := req.GetPayload()
+	if opt == nil {
+		return nil, errBadRequest
+	}
+
+	if err := srv.repo.VerifyRepo(opt); err != nil {
+		return nil, err
+	}
+
+	fs, err := fs.NewCloudFS(opt.Driver, opt.Option)
+	if err != nil {
+		return nil, err
+	}
+	defer fs.Close()
+
+	if _, err := fs.List(ctx, "/"); err != nil {
+		return nil, err
+	}
+	return &pb.Repo_TestResponse{Success: true}, nil
+}

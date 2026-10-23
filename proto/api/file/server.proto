@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package api.file;
+
+option go_package = "api/file";
+
+service ExternalServerService {
+	rpc StartServer (ExternalServer.StartRequest) returns (ExternalServer.StartResponse) {
+	}
+
+	rpc StopServer (ExternalServer.StopRequest) returns (ExternalServer.StopResponse) {
+	}
+
+	rpc ServerStatus (ExternalServer.GetRequest) returns (ExternalServer.GetResponse) {
+	}
+}
+
+message ExternalServer {
+	string addr = 1;
+	bool   running = 2;
+	string error = 3;
+
+	message GetRequest {
+		string type = 1;
+	}
+
+	message GetResponse {
+		ExternalServer result = 1;
+	}
+
+	message StartRequest {
+		string type = 1;
+		string option = 2;
+	}
+
+	message StartResponse {
+		ExternalServer result = 1;
+	}
+
+	message StopRequest {
+		string type = 1;
+	}
+
+	message StopResponse {
+	}
+}
