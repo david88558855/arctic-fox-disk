@@ -1,6 +1,7 @@
 import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:maple_file/common/theme/design_tokens.dart';
 
 class ColorUtil {
   static Color backgroundColorWithString(String value) {
@@ -23,24 +24,18 @@ class ColorUtil {
         : Colors.white;
   }
 
+  /// 页面底色。固定主题：直接取令牌，不随系统深色模式变化。
   static Color scaffoldBackgroundColor(BuildContext context) {
-    return CupertinoDynamicColor.resolve(
-      CupertinoColors.systemGroupedBackground,
-      context,
-    );
+    return MPColor.bg;
   }
 
+  /// 卡片/分组底。固定主题：直接取令牌。
   static Color backgroundColor(BuildContext context) {
-    return CupertinoDynamicColor.resolve(
-      CupertinoColors.secondarySystemGroupedBackground,
-      context,
-    );
+    return MPColor.surface;
   }
 
+  /// 次级背景。固定主题：与卡片底一致。
   static Color secondaryBackgroundColor(BuildContext context) {
-    return CupertinoDynamicColor.resolve(
-      CupertinoColors.secondarySystemGroupedBackground,
-      context,
-    );
+    return MPColor.surface;
   }
 }

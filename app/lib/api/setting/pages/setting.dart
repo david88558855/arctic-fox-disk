@@ -45,17 +45,6 @@ class SettingScreen extends StatelessWidget {
             children: [
               PlatformListTile(
                 leading: Icon(
-                  Icons.brightness_medium,
-                  color: themeData.colorScheme.primary,
-                ),
-                title: Text("主题".tr()),
-                trailing: PlatformListTileChevron(),
-                onTap: () {
-                  navigatorState(context).pushNamed('/setting/theme');
-                },
-              ),
-              PlatformListTile(
-                leading: Icon(
                   Icons.language,
                   color: themeData.colorScheme.primary,
                 ),
@@ -204,13 +193,6 @@ class _DesktopSettingState extends State<DesktopSettingScreen> {
         label: "基础设置".tr(),
         expanded: true,
         children: [
-          CustomTreeMenu(
-            icon: Icons.brightness_medium,
-            label: "主题".tr(),
-            onTap: () {
-              _navigatorPush('/setting/theme');
-            },
-          ),
           CustomTreeMenu(
             icon: Icons.language,
             label: "语言".tr(),

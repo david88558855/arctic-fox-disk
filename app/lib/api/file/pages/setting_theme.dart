@@ -4,6 +4,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 import 'package:maple_file/app/i18n.dart';
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:maple_file/common/utils/color.dart';
 import 'package:maple_file/common/widgets/form.dart';
 import 'package:maple_file/common/widgets/dialog.dart';
@@ -136,7 +137,6 @@ class _FileSettingThemeState extends ConsumerState<FileSettingThemeScreen> {
                   ],
                 ),
                 onTap: () async {
-                  final appearance = ref.read(appearanceProvider);
                   final result = await showCustomDialog<FlexScheme>(
                     context,
                     height: MediaQuery.sizeOf(context).height * 0.618,
@@ -148,14 +148,15 @@ class _FileSettingThemeState extends ConsumerState<FileSettingThemeScreen> {
                             height: 24,
                             width: 24,
                             decoration: BoxDecoration(
-                              color: appearance.scheme.primaryColor(context),
+                              // 与 FileIcon 的默认取色（Theme.primaryColor）保持一致
+                              color: MPColor.primary,
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(12)),
                             ),
                           ),
                           // selected: setting.iconColor == null,
                           onTap: () {
-                            Navigator.of(context).pop(appearance.scheme);
+                            Navigator.of(context).pop(defaultFlexScheme);
                           },
                         ),
                         for (final scheme in FlexScheme.values)
@@ -181,7 +182,7 @@ class _FileSettingThemeState extends ConsumerState<FileSettingThemeScreen> {
                   if (result != null) {
                     ref.read(fileSettingProvider.notifier).update((state) {
                       return state.copyWith(
-                        iconColor: result.name == appearance.scheme.name
+                        iconColor: result.name == defaultFlexScheme.name
                             ? null
                             : result.name,
                       );

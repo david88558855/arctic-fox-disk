@@ -3,12 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 import 'app/app.dart';
 import 'app/grpc.dart';
 import 'app/i18n.dart';
 
+import 'common/theme/mp_theme.dart';
 import 'common/utils/util.dart';
 
 import 'api/file/route.dart' as file;
@@ -88,21 +88,12 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
 
     final locale = Locale(appearance.locale);
 
-    final lightTheme = FlexThemeData.light(
-      scheme: appearance.scheme,
-      fontFamily: Util.fontFamily,
-    );
-    final darkTheme = FlexThemeData.dark(
-      scheme: appearance.scheme,
-      fontFamily: Util.fontFamily,
-    );
+    // 固定单一浅色主题：light / dark 返回同一套，系统深色模式也不切换。
+    final lightTheme = MPTheme.light(fontFamily: Util.fontFamily);
+    final darkTheme = lightTheme;
 
-    final cupertinoLightTheme = MaterialBasedCupertinoThemeData(
-      materialTheme: lightTheme,
-    );
-    final cupertinoDarkTheme = MaterialBasedCupertinoThemeData(
-      materialTheme: darkTheme,
-    );
+    final cupertinoLightTheme = MPTheme.cupertino(lightTheme);
+    final cupertinoDarkTheme = MPTheme.cupertino(darkTheme);
     return PlatformProvider(
       // initialPlatform: TargetPlatform.android,
       settings: PlatformSettingsData(
@@ -117,13 +108,9 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
         final lightTextTheme = cupertinoLightTheme.textTheme;
         final darkTextTheme = cupertinoDarkTheme.textTheme;
         return PlatformTheme(
-          themeMode: appearance.themeMode,
-          materialLightTheme: lightTheme.copyWith(
-            listTileTheme: ListTileThemeData(minTileHeight: 48),
-          ),
-          materialDarkTheme: darkTheme.copyWith(
-            listTileTheme: ListTileThemeData(minTileHeight: 48),
-          ),
+          themeMode: ThemeMode.light,
+          materialLightTheme: lightTheme,
+          materialDarkTheme: darkTheme,
           cupertinoLightTheme: cupertinoLightTheme.copyWith(
             barBackgroundColor: cupertinoLightTheme.scaffoldBackgroundColor,
             textTheme: lightTextTheme.copyWith(
