@@ -1,5 +1,7 @@
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
+
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -65,7 +67,7 @@ class _SettingBackupState extends ConsumerState<SettingBackupScreen> {
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall
-                          ?.copyWith(color: Colors.grey),
+                          ?.copyWith(color: MPColor.ink3),
                     );
                   }
                 },

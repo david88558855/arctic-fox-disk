@@ -2,6 +2,8 @@ import 'dart:io' as io;
 import 'package:desktop_drop/desktop_drop.dart';
 
 import 'package:flutter/material.dart';
+
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:maple_file/app/i18n.dart';
@@ -68,7 +70,7 @@ class _FileDragState extends ConsumerState<FileDrag> {
           ? Container(
               width: double.infinity,
               height: double.infinity,
-              color: Colors.black.withOpacity(0.2),
+              color: MPColor.ink.withValues(alpha: 0.2),
               child: Center(
                 child: Text("拖拽文件到这里".tr()),
               ),

@@ -134,7 +134,7 @@ class AboutScreen extends ConsumerWidget {
                   Text(
                     '© ${now.year} honmaple',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey,
+                          color: MPColor.ink3,
                         ),
                   ),
                 ]),

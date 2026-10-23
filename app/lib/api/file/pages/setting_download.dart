@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -70,7 +72,7 @@ class _FileSettingDownloadState
                           return Text(
                             "${snapshot.data}",
                             style: textTheme.bodySmall
-                                ?.copyWith(color: Colors.grey),
+                                ?.copyWith(color: MPColor.ink3),
                           );
                         }
                         return Text("加载中...".tr());
@@ -78,7 +80,7 @@ class _FileSettingDownloadState
                     )
                   : Text(
                       setting.downloadPath!,
-                      style: textTheme.bodySmall?.copyWith(color: Colors.grey),
+                      style: textTheme.bodySmall?.copyWith(color: MPColor.ink3),
                     ),
               trailing: isMaterial(context)
                   ? Icon(Icons.chevron_right)
