@@ -272,4 +272,6 @@ const enUS = {
   "默认60秒后自动清除缓存(单位：秒)": "Default auto clear cache after 60 seconds",
   "默认为 {path}": "Default {path}",
   "默认保存路径": "Download Path",
+  "已启用": "Enabled",
+  "未启用": "Disabled",
 };

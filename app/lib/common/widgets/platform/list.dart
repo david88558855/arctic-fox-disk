@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -18,7 +20,7 @@ class CustomListSection extends StatelessWidget {
     super.key,
     this.header,
     this.footer,
-    this.margin = const EdgeInsets.fromLTRB(20, 10, 20, 10),
+    this.margin = const EdgeInsets.fromLTRB(16, 8, 16, 8),
     this.dividerMargin = _kBaseDividerMargin,
     double? additionalDividerMargin,
     bool hasLeading = true,
@@ -36,7 +38,7 @@ class CustomListSection extends StatelessWidget {
     this.footer,
     required this.itemCount,
     required this.itemBuilder,
-    this.margin = const EdgeInsets.fromLTRB(20, 10, 20, 10),
+    this.margin = const EdgeInsets.fromLTRB(16, 8, 16, 8),
     this.dividerMargin = _kBaseDividerMargin,
     double? additionalDividerMargin,
     bool hasLeading = true,
@@ -63,7 +65,7 @@ class CustomListSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color dividerColor =
-        separatorColor ?? CupertinoColors.separator.resolveFrom(context);
+        separatorColor ?? MPColor.border;
     final double dividerHeight = 1.0 / MediaQuery.devicePixelRatioOf(context);
 
     final Widget shortDivider = Container(
@@ -91,20 +93,16 @@ class CustomListSection extends StatelessWidget {
             itemBuilder: (context, index) {
               BorderRadius? borderRadius;
               if (itemCount == 1) {
-                borderRadius = BorderRadius.all(Radius.circular(8));
+                borderRadius = BorderRadius.all(Radius.circular(MPRadius.s14));
               } else if (index == 0) {
-                borderRadius = BorderRadius.vertical(top: Radius.circular(8));
+                borderRadius = BorderRadius.vertical(top: Radius.circular(MPRadius.s14));
               } else if (index == itemCount - 1) {
                 borderRadius =
-                    BorderRadius.vertical(bottom: Radius.circular(8));
+                    BorderRadius.vertical(bottom: Radius.circular(MPRadius.s14));
               }
               return Container(
                 decoration: BoxDecoration(
-                  color: CupertinoDynamicColor.resolve(
-                    backgroundColor ??
-                        CupertinoColors.secondarySystemGroupedBackground,
-                    context,
-                  ),
+                  color: backgroundColor ?? MPColor.surface,
                   borderRadius: borderRadius,
                 ),
                 child: itemBuilder(context, index),

@@ -96,7 +96,7 @@ abstract final class MPTheme {
         space: 1,
         indent: 20,
       ),
-      listTileTheme: const ListTileThemeData(minTileHeight: 48),
+      listTileTheme: const ListTileThemeData(minTileHeight: 52),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: MPColor.surface2,

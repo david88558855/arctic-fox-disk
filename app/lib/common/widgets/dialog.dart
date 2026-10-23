@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -49,7 +51,7 @@ class _CustomConfirmDialogState extends State<CustomConfirmDialog> {
     if (isMaterial(context)) {
       return AlertDialog(
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(MPRadius.s18)),
         ),
         titlePadding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
         contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -263,8 +265,8 @@ Future<T?> showCustomDialog<T>(
       useRootNavigator: useRootNavigator,
       clipBehavior: Clip.hardEdge,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(MPRadius.s18), topRight: Radius.circular(MPRadius.s18)),
       ),
       builder: (BuildContext context) {
         final maxHeight =
@@ -289,7 +291,7 @@ Future<T?> showCustomDialog<T>(
         return AlertDialog(
           clipBehavior: Clip.hardEdge,
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
+            borderRadius: BorderRadius.all(Radius.circular(MPRadius.s18)),
           ),
           contentPadding: const EdgeInsets.all(0),
           content: SizedBox(
@@ -302,7 +304,7 @@ Future<T?> showCustomDialog<T>(
       return Dialog(
         clipBehavior: Clip.hardEdge,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
+          borderRadius: BorderRadius.all(Radius.circular(MPRadius.s18)),
         ),
         child: SizedBox(
           width: width,

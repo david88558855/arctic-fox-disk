@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:maple_file/app/app.dart';
 import 'package:maple_file/app/i18n.dart';
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:maple_file/common/widgets/tree.dart';
 import 'package:maple_file/common/widgets/custom.dart';
 import 'package:maple_file/common/widgets/responsive.dart';
@@ -63,19 +64,32 @@ class _TaskListState extends ConsumerState<TaskListScreen>
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: TabBar(
-              controller: _tabController,
-              // unselectedLabelColor: Colors.black,
-              // labelColor: Colors.deepPurple,
-              // // labelPadding: EdgeInsets.symmetric(horizontal: 16.0),
-              // labelStyle: TextStyle(
-              //   fontWeight: FontWeight.w600,
-              // ),
-              // indicatorColor: Colors.black,
-              tabs: <Tab>[
-                for (final value in TaskType.values)
-                  Tab(text: value.label(context)),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+              child: TabBar(
+                controller: _tabController,
+                dividerColor: Colors.transparent,
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicator: BoxDecoration(
+                  color: MPColor.primary100,
+                  borderRadius: MPRadius.r14,
+                ),
+                indicatorPadding: const EdgeInsets.symmetric(vertical: 5),
+                labelColor: MPColor.primary,
+                unselectedLabelColor: MPColor.ink3,
+                labelStyle: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                ),
+                unselectedLabelStyle: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+                tabs: <Tab>[
+                  for (final value in TaskType.values)
+                    Tab(text: value.label(context)),
+                ],
+              ),
             ),
           ),
           SliverFillRemaining(
@@ -213,16 +227,33 @@ class _TaskListState extends ConsumerState<TaskListScreen>
     );
   }
 
+  /// 进度条与状态文字的语义色：进行中品牌蓝 / 完成绿 / 失败红
+  Color _progressColor(Task item) {
+    switch (item.state) {
+      case TaskState.TASK_STATE_SUCCEEDED:
+        return MPColor.ok;
+      case TaskState.TASK_STATE_FAILED:
+        return MPColor.danger;
+      default:
+        return MPColor.primary;
+    }
+  }
+
   _buildProgress(BuildContext context, Task item) {
+    final color = _progressColor(item);
     return Column(
       children: [
-        const SizedBox(height: 4),
-        LinearProgressIndicator(
-          color: Colors.teal,
-          // backgroundColor: Colors.deepPurple,
-          value: item.progress,
+        const SizedBox(height: 6),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(MPRadius.pill),
+          child: LinearProgressIndicator(
+            color: color,
+            backgroundColor: MPColor.border,
+            minHeight: 5,
+            value: item.progress,
+          ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 6),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -233,7 +264,11 @@ class _TaskListState extends ConsumerState<TaskListScreen>
                   item.progressState,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black, fontSize: 12),
+                  style: const TextStyle(
+                    color: MPColor.ink2,
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
@@ -241,7 +276,11 @@ class _TaskListState extends ConsumerState<TaskListScreen>
               item.state.label(context),
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.black, fontSize: 12),
+              style: TextStyle(
+                color: color,
+                fontSize: 12.5,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ],
         ),
