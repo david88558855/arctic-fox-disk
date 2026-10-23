@@ -39,25 +39,35 @@ class SurfaceCard extends StatelessWidget {
       boxShadow: showShadow ? MPShadow.card : null,
     );
 
-    final content = Container(
-      padding: padding,
-      decoration: decoration,
-      child: child,
-    );
-
+    // 无交互：装饰 + 内容作为整体返回，零额外 widget 层级
     if (onTap == null && onLongPress == null) {
+      final content = Container(
+        padding: padding,
+        decoration: decoration,
+        child: child,
+      );
       return margin == null ? content : Padding(padding: margin!, child: content);
     }
+
+    // 有交互：装饰放在 Material 之外（DecoratedBox），Material 保持透明，
+    // 否则 Container 的背景色会盖住 InkWell 的水波纹。
     return Padding(
       padding: margin ?? EdgeInsets.zero,
-      child: Material(
-        color: Colors.transparent,
-        borderRadius: radius,
-        child: InkWell(
+      child: DecoratedBox(
+        decoration: decoration,
+        child: Material(
+          color: Colors.transparent,
           borderRadius: radius,
-          onTap: onTap,
-          onLongPress: onLongPress,
-          child: content,
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            borderRadius: radius,
+            onTap: onTap,
+            onLongPress: onLongPress,
+            child: Padding(
+              padding: padding ?? EdgeInsets.zero,
+              child: child,
+            ),
+          ),
         ),
       ),
     );
