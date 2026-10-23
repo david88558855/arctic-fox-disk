@@ -11,6 +11,7 @@ concurrency:
 
 env:
   FLUTTER_VERSION: "3.29.3"
+  GO_VERSION: "1.23"
 
 jobs:
   apk:
@@ -27,11 +28,33 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      - uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: "**/go.sum"
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
+
+      # android/app/libs/libserver.aar 由 Go server 用 gomobile 绑定生成，
+      # 仓库里不带这个产物，必须先编译，否则 gradle 报 Could not find :libserver
+      - name: Build Go aar
+        working-directory: .
+        run: |
+          mkdir -p app/android/app/libs
+          cd server
+          go install golang.org/x/mobile/cmd/gomobile@latest
+          go get golang.org/x/mobile/bind
+          gomobile init
+          gomobile bind \
+            -ldflags="-w -s -X github.com/honmaple/maple-file/server/internal/app.VERSION=dev" \
+            -o ../app/android/app/libs/libserver.aar \
+            -target=android -androidapi 21 \
+            -javapkg="com.honmaple.maple_file" \
+            github.com/honmaple/maple-file/server/cmd/mobile
 
       - name: Pub get
         run: flutter pub get
