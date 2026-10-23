@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:maple_file/app/app.dart';
 import 'package:maple_file/app/i18n.dart';
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:maple_file/common/utils/util.dart';
+import 'package:maple_file/common/widgets/brand_mark.dart';
 import 'package:maple_file/common/widgets/dialog.dart';
 import 'package:maple_file/common/widgets/tabbar.dart';
 import 'package:maple_file/api/file/pages/file_list.dart';
@@ -102,9 +104,15 @@ class _DesktopIndexState extends ConsumerState<DesktopIndexScreen> {
                   label: Text('任务'.tr()),
                 ),
               ],
-              leading: Util.isWindows || Util.isWeb
-                  ? null
-                  : const SizedBox(height: 16),
+              leading: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12),
+                child: BrandMarkTile(
+                  size: 32,
+                  radius: 10,
+                  background: MPColor.primary100,
+                  foxColor: MPColor.primary,
+                ),
+              ),
               trailing: Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

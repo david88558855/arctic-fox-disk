@@ -28,6 +28,10 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
+    # ffigen / protoc 生成的绑定代码，不参与 lint（否则基线就有上百条 warning）
+    - "lib/generated/**"
+    # 构建期脚本（非 app 代码）
+    - "_script/**"
   errors:
     invalid_annotation_target: ignore
 

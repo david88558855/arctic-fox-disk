@@ -5,7 +5,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:maple_file/app/i18n.dart';
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:maple_file/common/utils/color.dart';
+import 'package:maple_file/common/widgets/brand_mark.dart';
 import 'package:maple_file/common/widgets/custom.dart';
 import 'package:maple_file/common/widgets/platform.dart';
 import 'package:maple_file/common/widgets/responsive.dart';
@@ -37,7 +39,7 @@ class AboutScreen extends ConsumerWidget {
                     alignment: Alignment.center,
                     child: Column(
                       children: [
-                        Image.asset("assets/icon/icon.png", width: 80),
+                        const BrandMark(size: 64, color: MPColor.primary),
                         Text("红枫云盘 {version}".tr(
                           args: {"version": resp.version},
                         )),

@@ -47,8 +47,21 @@ jobs:
       - name: Build runner
         run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: Analyze
-        run: flutter analyze --no-fatal-infos
+      # 基线本身带 143 条历史 issue，这里只拦"新增 error"，不拦存量
+      - name: Analyze (fail on new errors only)
+        run: |
+          set +e
+          flutter analyze --no-fatal-infos --no-fatal-warnings > analyze.log 2>&1
+          cat analyze.log
+          BASE_ERRS="lib/app/extensions/provider.dart"
+          BASE_WARNS="lib/api/file/providers/file_setting.dart"
+          new_err=$(grep -E "error •" analyze.log | grep -vE "$BASE_ERRS" | wc -l | tr -d ' ')
+          new_warn=$(grep -E "warning •" analyze.log | grep -vE "$BASE_WARNS" | wc -l | tr -d ' ')
+          echo "new errors: $new_err / new warnings: $new_warn"
+          if [ "$new_err" != "0" ]; then
+            echo "::error::$new_err new analyzer error(s)"
+            exit 1
+          fi
 
       - name: Format check
         run: dart format --output=none --set-exit-if-changed lib

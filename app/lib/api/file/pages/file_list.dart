@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:maple_file/app/i18n.dart';
 import 'package:maple_file/api/task/providers/task.dart';
 import 'package:maple_file/common/utils/util.dart';
+import 'package:maple_file/common/widgets/brand_mark.dart';
 import 'package:maple_file/common/widgets/responsive.dart';
 import 'package:maple_file/common/providers/selection.dart';
 import 'package:maple_file/generated/proto/api/file/file.pb.dart';
@@ -101,22 +102,17 @@ class _FileListState extends ConsumerState<FileListScreen> {
       title = widget.path.split('/').last;
     }
     return AppBar(
+      leadingWidth: _isRoot ? 58 : null,
       leading: _isRoot
-          ? Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(left: 4, right: 4),
-              child: const Text(
-                'F',
-                overflow: TextOverflow.visible,
-                softWrap: false,
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
-                ),
+          ? const Padding(
+              padding: EdgeInsets.only(left: 16),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: BrandMarkTile(size: 26, radius: 8),
               ),
             )
           : null,
-      title: Text(title),
+      title: Text(_isRoot ? '红枫云盘'.tr() : title),
       actions: [
         if (Breakpoint.isSmall(context))
           IconButton(
