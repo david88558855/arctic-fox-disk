@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:maple_file/common/theme/design_tokens.dart';
 
-import 'package:maple_file/common/utils/color.dart';
-
-import 'animation.dart';
+/// 点击回调：与旧实现（ConvexAppBar 的 GestureTapIndexCallback）签名一致，
+/// 上层调用点无需改动。
+typedef GestureTapIndexCallback = void Function(int index);
 
 class CustomTab {
   final IconData icon;
@@ -16,6 +16,10 @@ class CustomTab {
   });
 }
 
+/// 底部浮动胶囊导航。
+///
+/// 自绘而不是 ConvexAppBar：胶囊与卡片语言统一，且省掉一个三方依赖的
+/// 高度/凸起补偿（top: -16 那套）。对外 API 与原实现完全一致。
 class CustomTabBar extends StatefulWidget {
   const CustomTabBar({
     super.key,
@@ -33,96 +37,68 @@ class CustomTabBar extends StatefulWidget {
 }
 
 class _CustomTabBarState extends State<CustomTabBar> {
+  late int _current = widget.initialIndex;
+
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return DefaultTabController(
-      length: widget.items.length,
-      child: ConvexAppBar.builder(
-        count: widget.items.length,
-        itemBuilder: _CustomBuilder(
-          items: widget.items,
-          color: Colors.grey,
-          activeColor: colorScheme.primary,
-        ),
-        height: 56,
-        top: -16,
-        curveSize: 56,
-        elevation: 0,
-        backgroundColor: ColorUtil.secondaryBackgroundColor(context),
-        onTap: widget.onItemChanged,
-      ),
-    );
-  }
-}
-
-class _CustomBuilder extends DelegateBuilder {
-  final List<CustomTab> items;
-  final Color? color;
-  final Color? activeColor;
-
-  _CustomBuilder({
-    required this.items,
-    this.color,
-    this.activeColor,
-  });
-
-  @override
-  Widget build(BuildContext context, int index, bool active) {
-    final item = items[index];
-    final textScheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
-    if (active) {
-      return Column(
-        spacing: 4,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          CustomAnimationBuilder(
-            data: index,
-            tween: Tween(begin: 24.0, end: 42.0),
-            duration: Duration(milliseconds: 200),
-            builder: (context, animation, _) {
-              return Container(
-                width: animation.value,
-                height: animation.value,
-                margin: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: colorScheme.primary,
-                ),
-                child: Icon(
-                  item.icon,
-                  size: 24,
-                  color: colorScheme.onPrimary,
-                ),
-              );
-            },
-          ),
-          Text(
-            item.label,
-            style: textScheme.labelMedium?.copyWith(color: activeColor),
-          )
-        ],
-      );
-    }
     return Container(
-      color: Colors.transparent,
-      child: Column(
-        spacing: 8,
-        mainAxisAlignment: MainAxisAlignment.end,
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      padding: const EdgeInsets.all(6),
+      decoration: const BoxDecoration(
+        color: MPColor.surface,
+        borderRadius: MPRadius.r18,
+        boxShadow: MPShadow.float,
+      ),
+      child: Row(
         children: <Widget>[
-          Icon(item.icon, size: 24, color: color),
-          Text(
-            item.label,
-            style: textScheme.labelMedium?.copyWith(color: color),
-          )
+          for (var index = 0; index < widget.items.length; index++)
+            Expanded(child: _buildItem(index)),
         ],
       ),
     );
   }
 
-  @override
-  bool fixed() {
-    return false;
+  Widget _buildItem(int index) {
+    final item = widget.items[index];
+    final active = index == _current;
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        if (_current == index) return;
+        setState(() {
+          _current = index;
+        });
+        widget.onItemChanged?.call(index);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOut,
+        height: 48,
+        decoration: BoxDecoration(
+          color: active ? MPColor.primary100 : Colors.transparent,
+          borderRadius: MPRadius.r14,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              item.icon,
+              size: 22,
+              color: active ? MPColor.primary : MPColor.ink3,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              item.label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: active ? FontWeight.w800 : FontWeight.w600,
+                color: active ? MPColor.primary : MPColor.ink3,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -6,11 +6,14 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:maple_file/app/i18n.dart';
 import 'package:maple_file/app/grpc.dart';
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:maple_file/common/utils/path.dart';
 import 'package:maple_file/common/utils/util.dart';
 import 'package:maple_file/common/utils/time.dart';
 import 'package:maple_file/common/utils/color.dart';
+import 'package:maple_file/common/widgets/brand_mark.dart';
 import 'package:maple_file/common/widgets/custom.dart';
+import 'package:maple_file/common/widgets/surface_card.dart';
 import 'package:maple_file/common/providers/selection.dart';
 
 import 'package:maple_file/generated/proto/api/file/file.pb.dart';
@@ -75,31 +78,40 @@ class _FileViewState extends ConsumerState<FileView> {
     if (items.isEmpty) {
       if (_isRoot) {
         return SliverFillRemaining(
+          hasScrollBody: false,
           child: Center(
-            child: TextButton.icon(
-              icon: const Icon(Icons.add),
-              label: Text("创建存储".tr()),
-              onPressed: () {
-                Navigator.pushNamed(context, '/file/setting/repo/edit');
-              },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const BrandMark(size: 40, color: MPColor.ink3),
+                const SizedBox(height: 12),
+                TextButton.icon(
+                  icon: const Icon(Icons.add, size: 18),
+                  label: Text("创建存储".tr()),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/file/setting/repo/edit');
+                  },
+                ),
+              ],
             ),
           ),
         );
       }
       return SliverFillRemaining(
+        hasScrollBody: false,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Icon(
-              Icons.hourglass_empty,
-              size: 36,
-              color: Colors.black54,
-            ),
-            const SizedBox(height: 8),
+            const BrandMark(size: 40, color: MPColor.ink3),
+            const SizedBox(height: 12),
             Text(
               "暂无文件".tr(),
-              style: const TextStyle(color: Colors.black54),
+              style: const TextStyle(
+                color: MPColor.ink3,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -126,36 +138,48 @@ class _FileViewState extends ConsumerState<FileView> {
         return widget.fileBuilder(
           context,
           row,
-          ListTile(
-            leading: FileIcon(file: row, size: 0.8),
-            title: _buildName(row),
-            subtitle: Wrap(
-              spacing: 8,
-              children: [
-                Text(
-                  TimeUtil.pbToString(row.updatedAt, "yyyy-MM-dd HH:mm"),
-                  style: const TextStyle(fontSize: 12),
-                ),
-                if (row.type != "DIR")
-                  Text(
-                    Util.formatSize(row.size.toInt()),
-                    style: const TextStyle(fontSize: 12),
-                  ),
-              ],
-            ),
-            selected: selection.contains(row),
-            trailing: _isSelection(row)
-                ? _buildCheckbox(selection, row)
-                : !_isRoot
-                    ? IconButton(
-                        icon: const Icon(Icons.more_vert),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: SurfaceCard(
+              color: selection.contains(row) ? MPColor.primary50 : null,
+              showShadow: false,
+              padding: const EdgeInsets.fromLTRB(10, 8, 6, 8),
+              child: SizedBox(
+                height: 46,
+                child: Row(
+                  children: <Widget>[
+                    FileIcon(file: row, size: 0.625),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _buildName(row),
+                          const SizedBox(height: 3),
+                          _buildMeta(row),
+                        ],
+                      ),
+                    ),
+                    if (_isSelection(row))
+                      _buildCheckbox(selection, row)
+                    else if (!_isRoot)
+                      IconButton(
+                        icon: const Icon(
+                          Icons.more_vert,
+                          size: 20,
+                          color: MPColor.ink3,
+                        ),
                         onPressed: () async {
                           final result = await showFileAction(context, row);
                           if (!context.mounted) return;
                           result?.action(context, row, ref: ref);
                         },
-                      )
-                    : null,
+                      ),
+                  ],
+                ),
+              ),
+            ),
           ),
         );
       },
@@ -169,8 +193,8 @@ class _FileViewState extends ConsumerState<FileView> {
       itemCount: rows.length,
       // 单个文件占用的宽度
       maxCrossAxisExtent: 100,
-      mainAxisSpacing: 4,
-      crossAxisSpacing: 4,
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
       itemBuilder: (context, index) {
         final row = rows[index];
         return Stack(children: [
@@ -183,12 +207,14 @@ class _FileViewState extends ConsumerState<FileView> {
           widget.fileBuilder(
             context,
             row,
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+            SurfaceCard(
+              color: _isSelection(row) ? MPColor.primary50 : null,
+              showShadow: false,
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  FileIcon(file: row, size: 1),
+                  FileIcon(file: row, size: 0.75),
                   const SizedBox(height: 8),
                   _buildName(row, maxLines: 2, center: true),
                 ],
@@ -212,6 +238,27 @@ class _FileViewState extends ConsumerState<FileView> {
       textAlign: center ? TextAlign.center : null,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  /// 时间 · 大小，12.5/600/ink2
+  Widget _buildMeta(File row) {
+    const style = TextStyle(
+      fontSize: 12.5,
+      fontWeight: FontWeight.w600,
+      color: MPColor.ink2,
+    );
+    return Wrap(
+      spacing: 8,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: <Widget>[
+        Text(
+          TimeUtil.pbToString(row.updatedAt, "yyyy-MM-dd HH:mm"),
+          style: style,
+        ),
+        if (row.type != "DIR")
+          Text(Util.formatSize(row.size.toInt()), style: style),
+      ],
     );
   }
 

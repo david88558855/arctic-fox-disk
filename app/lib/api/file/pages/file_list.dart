@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:maple_file/app/i18n.dart';
 import 'package:maple_file/api/task/providers/task.dart';
+import 'package:maple_file/common/theme/design_tokens.dart';
 import 'package:maple_file/common/utils/util.dart';
 import 'package:maple_file/common/widgets/brand_mark.dart';
+import 'package:maple_file/common/widgets/surface_card.dart';
 import 'package:maple_file/common/widgets/responsive.dart';
 import 'package:maple_file/common/providers/selection.dart';
 import 'package:maple_file/generated/proto/api/file/file.pb.dart';
@@ -80,8 +82,11 @@ class _FileListState extends ConsumerState<FileListScreen> {
       ),
       floatingActionButton: !_isRoot
           ? FloatingActionButton(
-              shape: const CircleBorder(),
-              child: const Icon(Icons.add_a_photo),
+              shape: const RoundedRectangleBorder(borderRadius: MPRadius.r18),
+              backgroundColor: MPColor.primary,
+              foregroundColor: Colors.white,
+              elevation: 2,
+              child: const Icon(Icons.add_a_photo, size: 22),
               onPressed: () async {
                 final result = await showFileFloatingAction(
                   context,
@@ -240,47 +245,71 @@ class _FileSelectionListState extends ConsumerState<FileSelectionList> {
   }
 
   _buildBottomBar(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: constraints.minWidth,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FileSelectionAction.copy,
-                FileSelectionAction.move,
-                if (widget.selection.selected.length == 1)
-                  FileSelectionAction.rename,
-                FileSelectionAction.download,
-                FileSelectionAction.remove,
-              ].map((value) {
-                return TextButton(
-                  child: Wrap(
-                    direction: Axis.vertical,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      Icon(value.icon),
-                      Text(value.label),
-                    ],
-                  ),
-                  onPressed: () {
-                    value.action(
-                      context,
-                      widget.path,
-                      widget.selection.selected,
-                      ref: ref,
+    return SafeArea(
+      top: false,
+      minimum: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: SurfaceCard(
+        showShadow: false,
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: constraints.maxWidth,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FileSelectionAction.copy,
+                    FileSelectionAction.move,
+                    if (widget.selection.selected.length == 1)
+                      FileSelectionAction.rename,
+                    FileSelectionAction.download,
+                    FileSelectionAction.remove,
+                  ].map((value) {
+                    return TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: MPColor.ink2,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        minimumSize: const Size(0, 0),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: Wrap(
+                        direction: Axis.vertical,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Icon(value.icon, size: 20),
+                          const SizedBox(height: 2),
+                          Text(
+                            value.label,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        value.action(
+                          context,
+                          widget.path,
+                          widget.selection.selected,
+                          ref: ref,
+                        );
+                      },
                     );
-                  },
-                );
-              }).toList(),
-            ),
-          ),
-        );
-      },
+                  }).toList(),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 

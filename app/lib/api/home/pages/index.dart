@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:maple_file/app/app.dart';
 import 'package:maple_file/app/i18n.dart';
 import 'package:maple_file/common/theme/design_tokens.dart';
-import 'package:maple_file/common/utils/util.dart';
 import 'package:maple_file/common/widgets/brand_mark.dart';
 import 'package:maple_file/common/widgets/dialog.dart';
 import 'package:maple_file/common/widgets/tabbar.dart';
@@ -38,8 +37,8 @@ class _IndexState extends ConsumerState<IndexScreen> {
     return Scaffold(
       body: _widgets.elementAt(_selectedIndex),
       bottomNavigationBar: !fileSelection
-          ? Container(
-              padding: Util.isAndroid ? EdgeInsets.only(bottom: 12) : null,
+          ? SafeArea(
+              top: false,
               child: CustomTabBar(
                 items: [
                   CustomTab(icon: Icons.business, label: "文件".tr()),
