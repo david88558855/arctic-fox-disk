@@ -1,0 +1,123 @@
+name: size-report
+
+# 手动触发：产出 debug / release 两套 APK 并给出体积构成对比。
+# 目的：验证"安装包为何远大于上游 release"的假设，并作为后续瘦身的基线。
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: size-report-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: "3.29.3"
+  GO_VERSION: "1.23"
+
+jobs:
+  size:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: "**/go.sum"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Build Go aar
+        working-directory: .
+        run: |
+          mkdir -p app/android/app/libs
+          cd server
+          go install golang.org/x/mobile/cmd/gomobile@latest
+          go get golang.org/x/mobile/bind
+          gomobile init
+          gomobile bind \
+            -ldflags="-w -s -X github.com/david88558855/arctic-fox-disk/server/internal/app.VERSION=dev" \
+            -o ../app/android/app/libs/libserver.aar \
+            -target=android -androidapi 21 \
+            -javapkg="com.arcticfox.disk" \
+            github.com/david88558855/arctic-fox-disk/server/cmd/mobile
+
+      - name: AAR size
+        working-directory: .
+        run: |
+          echo "### Go AAR" >> $GITHUB_STEP_SUMMARY
+          ls -lh app/android/app/libs/libserver.aar | awk '{print "- size: "$5}' >> $GITHUB_STEP_SUMMARY
+          unzip -l app/android/app/libs/libserver.aar | grep "\.so" >> $GITHUB_STEP_SUMMARY || true
+
+      - name: Pub get + codegen
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+
+      - name: Build debug (arm64)
+        run: flutter build apk --debug --target-platform android-arm64
+
+      # release 需要签名配置；这里生成一个临时 keystore 仅用于体积测量
+      - name: Temp keystore for release build
+        run: |
+          keytool -genkeypair -v \
+            -keystore android/temp-debug.jks \
+            -storepass android -keypass android \
+            -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 \
+            -dname "CN=Size Report,OU=CI,O=ArcticFox,L=NA,ST=NA,C=CN"
+          printf 'storePassword=android\nkeyPassword=android\nkeyAlias=androiddebugkey\nstoreFile=temp-debug.jks\n' > android/key.properties
+
+      - name: Build release (split per abi)
+        run: flutter build apk --release --split-per-abi
+
+      - name: Report
+        run: |
+          python3 - <<'PY' >> $GITHUB_STEP_SUMMARY
+          import glob, os, zipfile, collections
+
+          def group_of(name):
+              parts = name.split('/')
+              if parts[0] == 'lib' and len(parts) > 2:
+                  return 'lib/' + parts[1]
+              if parts[0] == 'assets' and len(parts) > 2:
+                  return '/'.join(parts[:2])
+              if parts[0] in ('classes.dex', 'resources.arsc'):
+                  return parts[0]
+              return parts[0]
+
+          for path in sorted(glob.glob('build/app/outputs/flutter-apk/*.apk')):
+              z = zipfile.ZipFile(path)
+              info = [i for i in z.infolist() if not i.is_dir()]
+              total = sum(i.compress_size for i in info)
+              raw = sum(i.file_size for i in info)
+              print(f"\n### {os.path.basename(path)}")
+              print(f"- 包体积（压缩后）: **{total/1048576:.1f} MB** / 解压后 {raw/1048576:.1f} MB")
+              groups = collections.Counter()
+              for i in info:
+                  groups[group_of(i.filename)] += i.compress_size
+              print("\n| 分组 | 占用 | 占比 |")
+              print("|---|---:|---:|")
+              for k, v in groups.most_common(10):
+                  print(f"| `{k}` | {v/1048576:.1f} MB | {v*100/total:.0f}% |")
+              print("\n最大文件：")
+              for i in sorted(info, key=lambda x: -x.compress_size)[:10]:
+                  print(f"- `{i.filename}` — {i.compress_size/1048576:.1f} MB")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-apks
+          path: app/build/app/outputs/flutter-apk/*-release.apk
+          if-no-files-found: warn
