@@ -62,11 +62,50 @@ jobs:
       - name: Build runner
         run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: Build debug APK
-        run: flutter build apk --debug --target-platform android-arm64
+      - name: Temp keystore (release signing for CI artifacts)
+        run: |
+          keytool -genkeypair -v \
+            -keystore android/temp-debug.jks \
+            -storepass android -keypass android \
+            -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 \
+            -dname "CN=CI Build,OU=CI,O=ArcticFox,L=NA,ST=NA,C=CN"
+          # storeFile 由 gradle file() 相对 android/app/ 解析
+          printf 'storePassword=android\nkeyPassword=android\nkeyAlias=androiddebugkey\nstoreFile=../temp-debug.jks\n' > android/key.properties
+
+      # 必须用 --split-per-abi：单纯限制 --target-platform 会把 Flutter 引擎
+      # 裁到只剩 arm64，而 libserver.aar 的 jni 仍是 4 个 ABI，结果 APK 向系统
+      # 声明支持 4 种 ABI、32 位设备能装上却没有 libflutter.so -> 启动即闪退。
+      - name: Build release APKs (split per abi)
+        run: flutter build apk --release --split-per-abi
+
+      - name: Build debug APK (split per abi)
+        run: flutter build apk --debug --split-per-abi
+
+      # 防回归：每个 apk 的 lib/<abi>/ 里必须有 libflutter.so
+      - name: Verify every ABI ships libflutter.so
+        run: |
+          python3 - <<'PY'
+          import glob, os, sys, zipfile
+          bad = []
+          for path in sorted(glob.glob('build/app/outputs/flutter-apk/*.apk')):
+              z = zipfile.ZipFile(path)
+              abis = sorted({n.split('/')[1] for n in z.namelist()
+                             if n.startswith('lib/') and n.count('/') >= 2})
+              missing = [a for a in abis
+                         if f'lib/{a}/libflutter.so' not in z.namelist()]
+              size = os.path.getsize(path) / 1048576
+              print(f'{os.path.basename(path):32s} {size:7.1f} MB  abis={abis}  missing={missing}')
+              if missing:
+                  bad.append((path, missing))
+          if bad:
+              print('::error::以下 APK 缺少 libflutter.so，安装后必然闪退')
+              for p, m in bad:
+                  print(f'  {p}: {m}')
+              sys.exit(1)
+          PY
 
       - uses: actions/upload-artifact@v4
         with:
-          name: app-debug-apk
-          path: app/build/app/outputs/flutter-apk/app-debug.apk
-          if-no-files-found: warn
+          name: apks
+          path: app/build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
