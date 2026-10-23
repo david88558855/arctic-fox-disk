@@ -130,36 +130,6 @@ class SettingScreen extends StatelessWidget {
               ),
             ],
           ),
-          CustomListSection(
-            header: Container(
-              alignment: Alignment.centerLeft,
-              child: Text("其它".tr(), style: themeData.textTheme.bodySmall),
-            ),
-            children: [
-              PlatformListTile(
-                leading: Icon(
-                  Icons.help,
-                  color: themeData.colorScheme.primary,
-                ),
-                title: Text("帮助".tr()),
-                trailing: PlatformListTileChevron(),
-                onTap: () {
-                  navigatorState(context).pushNamed('/help');
-                },
-              ),
-              PlatformListTile(
-                leading: Icon(
-                  Icons.person,
-                  color: themeData.colorScheme.primary,
-                ),
-                title: Text("关于".tr()),
-                trailing: PlatformListTileChevron(),
-                onTap: () {
-                  navigatorState(context).pushNamed('/about');
-                },
-              ),
-            ],
-          ),
         ],
       ),
     );

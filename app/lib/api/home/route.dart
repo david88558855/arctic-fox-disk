@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:arctic_fox_disk/app/router.dart';
 import 'package:arctic_fox_disk/common/widgets/responsive.dart';
 
-import "pages/help.dart";
-import "pages/about.dart";
 import "pages/index.dart";
 import "pages/not_found.dart";
 
@@ -14,15 +12,6 @@ Future<void> init(CustomRouter router) async {
         return const IndexScreen();
       }
       return const DesktopIndexScreen();
-    },
-    '/help': (context) {
-      return const HelpScreen();
-    },
-    '/help/webview': (context) {
-      return HelpWebViewScreen.fromRoute(ModalRoute.of(context));
-    },
-    '/about': (context) {
-      return const AboutScreen();
     },
     '/404': (context) {
       return const NotFoundScreen();

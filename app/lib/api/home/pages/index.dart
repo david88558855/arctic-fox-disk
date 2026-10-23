@@ -12,7 +12,6 @@ import 'package:arctic_fox_disk/api/file/widgets/file_tree.dart';
 import 'package:arctic_fox_disk/api/file/providers/file.dart';
 import 'package:arctic_fox_disk/api/setting/pages/setting.dart';
 
-import 'help.dart';
 
 class IndexScreen extends ConsumerStatefulWidget {
   const IndexScreen({super.key});
@@ -123,15 +122,6 @@ class _DesktopIndexState extends ConsumerState<DesktopIndexScreen> {
                         showCustomDialog(
                           context,
                           child: const DesktopSettingScreen(),
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.help, color: colorScheme.onSurface),
-                      onPressed: () {
-                        showCustomDialog(
-                          context,
-                          child: const DesktopHelpScreen(),
                         );
                       },
                     ),

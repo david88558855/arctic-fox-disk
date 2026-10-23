@@ -34,15 +34,99 @@ Future<void> initContainer(ProviderContainer container) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // 启动期兜底：把"静默闪退"变成可见的错误页，
+  // 否则 Android 上一个未捕获异常就表现为打开即退出，拿不到任何线索。
+  WidgetsBinding.instance.platformDispatcher.onError = (error, stack) {
+    // ignore: avoid_print
+    print('uncaught async error: $error\n$stack');
+    return true;
+  };
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+    // ignore: avoid_print
+    print('flutter error: ${details.exception}\n${details.stack}');
+  };
+
   final container = ProviderContainer();
 
-  await init();
-  await initContainer(container);
+  try {
+    await init();
+    await initContainer(container);
+  } catch (error, stack) {
+    // 这里不能用 App.logger：logger 本身可能就是失败的那一步
+    // ignore: avoid_print
+    print('bootstrap failed: $error\n$stack');
+    runApp(BootstrapFailureApp(error: error, stack: stack));
+    return;
+  }
 
   runApp(UncontrolledProviderScope(
     container: container,
     child: MyApp(),
   ));
+}
+
+/// 启动失败时的最小界面：不依赖任何 provider / 主题 / gRPC。
+class BootstrapFailureApp extends StatelessWidget {
+  const BootstrapFailureApp({
+    super.key,
+    required this.error,
+    this.stack,
+  });
+
+  final Object error;
+  final StackTrace? stack;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: const Color(0xFFF4F7FA),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  '启动失败 / Startup failed',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFF16202C),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  '应用初始化时抛出异常。请把下面这段信息反馈给开发者。',
+                  style: TextStyle(fontSize: 13, color: Color(0xFF5C6B7A)),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFFE7ECF2)),
+                  ),
+                  child: SelectableText(
+                    '$error\n\n${stack ?? ''}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      height: 1.5,
+                      color: Color(0xFF16202C),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class MyApp extends ConsumerStatefulWidget {
