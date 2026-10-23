@@ -77,7 +77,9 @@ jobs:
             -storepass android -keypass android \
             -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 \
             -dname "CN=Size Report,OU=CI,O=ArcticFox,L=NA,ST=NA,C=CN"
-          printf 'storePassword=android\nkeyPassword=android\nkeyAlias=androiddebugkey\nstoreFile=temp-debug.jks\n' > android/key.properties
+          # storeFile 由 build.gradle 的 file() 解析，相对模块目录 android/app/，
+          # 所以这里必须写成 ../temp-debug.jks
+          printf 'storePassword=android\nkeyPassword=android\nkeyAlias=androiddebugkey\nstoreFile=../temp-debug.jks\n' > android/key.properties
 
       - name: Build release (split per abi)
         run: flutter build apk --release --split-per-abi
